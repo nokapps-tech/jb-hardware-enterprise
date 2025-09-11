@@ -16,15 +16,18 @@
                     <flux:navlist.item icon="chart-bar-square" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
 
+                <flux:navlist.group :heading="__('Contacts')" class="grid mb-4 font-medium">
+                    @can('admin.companies.index')
+                        <flux:navlist.item icon="building-2" :href="route('companies.index')" :current="request()->routeIs('companies.*')" wire:navigate>{{ __('Companies') }}</flux:navlist.item>
+                    @endcan
+                </flux:navlist.group>
+
                 <flux:navlist.group :heading="__('System')" class="grid mb-4 font-medium">
                     @can('admin.users.index')
                         <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('users.*')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
                     @endcan
                     @can('admin.audits.index')
                         <flux:navlist.item icon="shield-check" :href="route('audits.index')" :current="request()->routeIs('audits.*')" wire:navigate>{{ __('Audit Log') }}</flux:navlist.item>
-                    @endcan
-                    @can('admin.companies.index')
-                        <flux:navlist.item icon="shield-check" :href="route('companies.index')" :current="request()->routeIs('companies.*')" wire:navigate>{{ __('Companies') }}</flux:navlist.item>
                     @endcan
                 </flux:navlist.group>
             </flux:navlist>
