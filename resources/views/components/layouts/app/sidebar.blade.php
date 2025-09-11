@@ -23,6 +23,9 @@
                     @can('admin.audits.index')
                         <flux:navlist.item icon="shield-check" :href="route('audits.index')" :current="request()->routeIs('audits.*')" wire:navigate>{{ __('Audit Log') }}</flux:navlist.item>
                     @endcan
+                    @can('admin.companies.index')
+                        <flux:navlist.item icon="shield-check" :href="route('companies.index')" :current="request()->routeIs('companies.*')" wire:navigate>{{ __('Companies') }}</flux:navlist.item>
+                    @endcan
                 </flux:navlist.group>
             </flux:navlist>
 
