@@ -67,6 +67,13 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/suppliers/{supplier}/edit', \App\Livewire\Suppliers\Edit::class)->name('suppliers.edit');
     });
 
+    Route::middleware('can:admin.transactions.index')->group(function () {
+        Route::get('/transactions', \App\Livewire\Transactions\Index::class)->name('transactions.index');
+        Route::get('/transactions/create', \App\Livewire\Transactions\Create::class)->name('transactions.create');
+        Route::get('/transactions/{transaction}', \App\Livewire\Transactions\Show::class)->name('transactions.show');
+        Route::get('/transactions/{transaction}/edit', \App\Livewire\Transactions\Edit::class)->name('transactions.edit');
+    });
+
     // Route::middleware('can:admin.roles.index')->group(function () {
     //     Route::get('/roles', \App\Livewire\Roles\Index::class)->name('roles.index');
     //     Route::get('/roles/create', \App\Livewire\Roles\Create::class)->name('roles.create')->middleware('can:admin.roles.create');

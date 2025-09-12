@@ -26,6 +26,9 @@
                     @can('admin.suppliers.index')
                         <flux:navlist.item icon="package" :href="route('suppliers.index')" :current="request()->routeIs('suppliers.*')" wire:navigate>{{ __('Suppliers') }}</flux:navlist.item>
                     @endcan
+                    @can('admin.transactions.index')
+                        <flux:navlist.item icon="arrow-right-left" :href="route('transactions.index')" :current="request()->routeIs('transactions.*')" wire:navigate>{{ __('Transactions') }}</flux:navlist.item>
+                    @endcan
                 </flux:navlist.group>
 
                 <flux:navlist.group :heading="__('Contacts')" class="grid mb-4 font-medium">
