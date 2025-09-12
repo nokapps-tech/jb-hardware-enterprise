@@ -13,10 +13,10 @@
         <flux:input wire:model="form.phone" :label="__('Phone')" type="text" autocomplete="form.phone"/>
     </div>
     <div>
-    <flux:select 
-        wire:model="form.company_id" 
-        :label="__('Company')"
-    >
+        <flux:select 
+            wire:model="form.company_id" 
+            :label="__('Company')"
+        >
             <option value="">{{ __('-- Select Company --') }}</option>
             @foreach($companies as $company)
                 <option value="{{ $company->id }}">{{ $company->name }}</option>

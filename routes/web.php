@@ -53,6 +53,13 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/product-categories/{productCategory}/edit', \App\Livewire\ProductCategories\Edit::class)->name('product-categories.edit');
     });
 
+    Route::middleware('can:admin.products.index')->group(function () {
+        Route::get('/products', \App\Livewire\Products\Index::class)->name('products.index');
+        Route::get('/products/create', \App\Livewire\Products\Create::class)->name('products.create');
+        Route::get('/products/{product}', \App\Livewire\Products\Show::class)->name('products.show');
+        Route::get('/products/{product}/edit', \App\Livewire\Products\Edit::class)->name('products.edit');
+    });
+
     // Route::middleware('can:admin.roles.index')->group(function () {
     //     Route::get('/roles', \App\Livewire\Roles\Index::class)->name('roles.index');
     //     Route::get('/roles/create', \App\Livewire\Roles\Create::class)->name('roles.create')->middleware('can:admin.roles.create');
