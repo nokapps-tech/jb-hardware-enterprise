@@ -37,7 +37,13 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/companies/{company}', \App\Livewire\Companies\Show::class)->name('companies.show');
         Route::get('/companies/{company}/edit', \App\Livewire\Companies\Edit::class)->name('companies.edit');
     });
-    
+
+    Route::middleware('can:admin.contacts.index')->group(function () {
+        Route::get('/contacts', \App\Livewire\Contacts\Index::class)->name('contacts.index');
+        Route::get('/contacts/create', \App\Livewire\Contacts\Create::class)->name('contacts.create');
+        Route::get('/contacts/{contact}', \App\Livewire\Contacts\Show::class)->name('contacts.show');
+        Route::get('/contacts/{contact}/edit', \App\Livewire\Contacts\Edit::class)->name('contacts.edit');
+    });
 
     // Route::middleware('can:admin.roles.index')->group(function () {
     //     Route::get('/roles', \App\Livewire\Roles\Index::class)->name('roles.index');
