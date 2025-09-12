@@ -24,6 +24,7 @@ class Index extends Component
             })
             ->orderBy('updated_at', 'desc')
             ->paginate();
+            
         return view('livewire.contact.index', [
             'contacts' => $contacts,
             'i' => $this->getPage() * $contacts->perPage(),
