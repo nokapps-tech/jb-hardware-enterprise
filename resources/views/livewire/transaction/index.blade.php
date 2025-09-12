@@ -47,7 +47,7 @@
                                 <thead>
                                 <tr>
                                     										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Transaction Number</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product Id</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Type</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Quantity</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Description</flux:text></th>
@@ -78,8 +78,15 @@
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->notes }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->order_date }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->status }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->created_by }}</flux:text></td>
-
+											<td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                @if($transaction->created_by)
+                                                    <a href="{{ route('users.show', $transaction->user->id) }}" class="text-blue-600 hover:underline">
+                                                        {{ $transaction->user->name }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-gray-400">—</span>
+                                                @endif
+                                            </td>
                                         <td class="whitespace-nowrap px-3 py-4 flex gap-1 text-sm font-medium text-gray-900">
                                             @can('admin.transactions.show')
                                                 <flux:button variant="ghost" href="{{ route('transactions.show', $transaction->id) }}" icon="magnifying-glass" class="mr-2" size="xs" tooltip="View details">

@@ -35,7 +35,11 @@
         <flux:input wire:model="form.notes" :label="__('Notes')" type="text" autocomplete="form.notes"/>
     </div>
     <div>
-        <flux:input wire:model="form.order_date" :label="__('Order Date')" type="text" autocomplete="form.order_date"/>
+        <flux:input 
+            wire:model="form.order_date" 
+            :label="__('Order Date')" 
+            type="date" 
+        />
     </div>
     <div>
         <flux:select 
@@ -47,9 +51,6 @@
                 <option value="{{ $status }}">{{ $status }}</option>
             @endforeach
         </flux:select>
-    </div>
-    <div>
-        <flux:input wire:model="form.created_by" :label="__('Created By')" type="text" autocomplete="form.created_by"/>
     </div>
 
     <div class="flex items-center gap-4">

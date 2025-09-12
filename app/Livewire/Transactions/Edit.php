@@ -4,7 +4,10 @@ namespace App\Livewire\Transactions;
 
 use App\Livewire\Forms\TransactionForm;
 use App\Models\Transaction;
+use App\Models\Product;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Edit extends Component
 {
@@ -23,16 +26,54 @@ class Edit extends Component
 
     public function save()
     {
-        $this->form->update();
+        DB::beginTransaction();
 
-        return $this->redirectRoute('transactions.index', navigate: true);
+        try {
+            $transaction = $this->form->transactionModel;
+
+            if ($transaction->status === 'Completed') {
+                $product = $transaction->product;
+                if ($transaction->type === 'In') {
+                    $product->decrement('stock', $transaction->quantity);
+                } elseif ($transaction->type === 'Out') {
+                    $product->increment('stock', $transaction->quantity);
+                }
+            }
+
+            $transaction->update([
+                'transaction_number' => $this->form->transaction_number,
+                'product_id'         => $this->form->product_id,
+                'type'               => $this->form->type,
+                'quantity'           => $this->form->quantity,
+                'description'        => $this->form->description,
+                'notes'              => $this->form->notes,
+                'order_date'         => $this->form->order_date,
+                'status'             => $this->form->status,
+            ]);
+
+            if ($transaction->status === 'Completed') {
+                $product = $transaction->product;
+                if ($transaction->type === 'In') {
+                    $product->increment('stock', $transaction->quantity);
+                } elseif ($transaction->type === 'Out') {
+                    $product->decrement('stock', $transaction->quantity);
+                }
+            }
+
+            DB::commit();
+
+            return $this->redirectRoute('transactions.index', navigate: true);
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function render()
     {
         return view('livewire.transaction.edit', [
             'products' => Product::orderBy('name')->get(),
-            'transactions' => $this->form->transactionModel,
+            'transaction' => $this->form->transactionModel,
         ]);
     }
 }

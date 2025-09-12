@@ -13,7 +13,7 @@ return new class extends Migration
     {
          Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_number')->unique();
+            $table->string('transaction_number');
             $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
             $table->string('type')->index();
             $table->integer('quantity');

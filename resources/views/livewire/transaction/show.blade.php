@@ -45,7 +45,7 @@
                                             </dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
                                                 @if($transaction->product)
-                                                    <a href="{{ route('contacts.show', $supplier->contact->id) }}" 
+                                                    <a href="{{ route('products.show', $transaction->product->id) }}" 
                                                     class="text-blue-600 hover:underline">
                                                         {{ $transaction->product->name }}
                                                     </a>
@@ -80,9 +80,17 @@
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Created By</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $transaction->created_by ?? 'None' }}</flux:text></dd>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
+                                                @if($transaction->user)
+                                                    <a href="{{ route('users.show', $transaction->user->id) }}" 
+                                                    class="text-blue-600 hover:underline">
+                                                        {{ $transaction->user->name }}
+                                                    </a>
+                                                @else
+                                                    <flux:text>{{ $transaction->user?->name ?? 'None' }}</flux:text>
+                                                @endif
+                                            </dd>
                                         </div>
-
                             </dl>
                         </div>
                     </div>

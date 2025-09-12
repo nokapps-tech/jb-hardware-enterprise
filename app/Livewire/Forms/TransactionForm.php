@@ -23,11 +23,14 @@ class TransactionForm extends Form
     {
         return [
 			'transaction_number' => 'required|string',
+            'product_id' => 'required|exists:products,id',
 			'type' => 'required|string',
 			'quantity' => 'required',
 			'description' => 'nullable|string',
 			'notes' => 'nullable|string',
+            'order_date' => 'nullable|date',
 			'status' => 'nullable|string',
+            'created_by' => 'nullable|string',
         ];
     }
 
