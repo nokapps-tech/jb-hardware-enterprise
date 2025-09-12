@@ -3,7 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Permission\Traits\HasRoles;
 /**
  * Class Company
  *
@@ -21,9 +25,10 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Company extends Model
+class Company extends Model implements Auditable
 {
-    
+    use SoftDeletes;
+    use Notifiable, HasRoles, AuditableTrait;
     protected $perPage = 20;
 
     /**
@@ -32,6 +37,5 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = ['name', 'industry', 'website', 'email', 'phone', 'address', 'postal_code'];
-
 
 }
