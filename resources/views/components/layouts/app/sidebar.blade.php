@@ -17,6 +17,12 @@
                 </flux:navlist.group>
 
                 <flux:navlist.group :heading="__('Contacts')" class="grid mb-4 font-medium">
+                    @can('admin.product-categories.index')
+                        <flux:navlist.item icon="blocks" :href="route('product-categories.index')" :current="request()->routeIs('product-categories.*')" wire:navigate>{{ __('Product Categories') }}</flux:navlist.item>
+                    @endcan
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Contacts')" class="grid mb-4 font-medium">
                     @can('admin.companies.index')
                         <flux:navlist.item icon="building-2" :href="route('companies.index')" :current="request()->routeIs('companies.*')" wire:navigate>{{ __('Companies') }}</flux:navlist.item>
                     @endcan
