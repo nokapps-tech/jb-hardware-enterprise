@@ -23,10 +23,10 @@ class SupplierForm extends Form
 			'name' => 'required|string',
 			'segment' => 'nullable|string',
             'type' => 'nullable|string',
-			'email' => 'string',
-			'phone' => 'string',
+			'email' => 'nullable|string',
+			'phone' => 'nullable|string',
             'contact_id' => 'required|exists:contacts,id',
-			'address' => 'string',
+			'address' => 'nullable|string',
         ];
     }
 

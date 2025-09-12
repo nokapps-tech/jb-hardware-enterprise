@@ -21,12 +21,12 @@ class CompanyForm extends Form
     {
         return [
 			'name' => 'required|string',
-			'industry' => 'string',
-			'website' => 'string',
-			'email' => 'string',
-			'phone' => 'string',
-			'address' => 'string',
-			'postal_code' => 'string',
+			'industry' => 'nullable|string',
+			'website' => 'nullable|string',
+			'email' => 'nullable|string',
+			'phone' => 'nullable|string',
+			'address' => 'nullable|string',
+			'postal_code' => 'nullable|string',
         ];
     }
 

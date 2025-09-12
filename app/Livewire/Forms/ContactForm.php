@@ -21,10 +21,10 @@ class ContactForm extends Form
         return [
 			'first_name' => 'required|string',
 			'last_name' => 'required|string',
-			'email' => 'string',
-			'phone' => 'string',
-			'job_title' => 'string',
-            'company_id' => 'required|exists:companies,id',
+			'email' => 'nullable|string',
+			'phone' => 'nullable|string',
+			'job_title' => 'nullable|string',
+            'company_id' => 'nullable|exists:companies,id',
         ];
     }
 

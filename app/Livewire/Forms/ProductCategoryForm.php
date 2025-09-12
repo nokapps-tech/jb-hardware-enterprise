@@ -16,7 +16,7 @@ class ProductCategoryForm extends Form
     {
         return [
 			'name' => 'required|string',
-			'description' => 'string',
+			'description' => 'nullable|string',
         ];
     }
 

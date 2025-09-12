@@ -21,7 +21,7 @@ class RoleForm extends Form
 			'display_text' => 'required|string',
 			'name' => 'required|string',
 			'guard_name' => 'required|string',
-			'description' => 'string',
+			'description' => 'nullable|string',
 			'readonly' => 'required',
         ];
     }
