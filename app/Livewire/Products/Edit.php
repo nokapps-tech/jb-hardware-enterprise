@@ -28,6 +28,7 @@ class Edit extends Component
     {
         return view('livewire.product.edit', [
             'product_categories' => ProductCategory::orderBy('name')->get(),
+            'product' => $this->form->productModel,
         ]);
     }
 }

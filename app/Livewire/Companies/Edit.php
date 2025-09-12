@@ -24,6 +24,8 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.company.edit');
+        return view('livewire.company.edit', [
+            'company' => $this->form->companyModel,
+        ]);
     }
 }

@@ -27,6 +27,7 @@ class Edit extends Component
     {
         return view('livewire.contact.edit', [
             'companies' => Company::orderBy('name')->get(),
+            'contact' => $this->form->contactModel,
         ]);
     }
 }
