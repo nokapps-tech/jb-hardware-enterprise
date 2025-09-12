@@ -16,9 +16,9 @@
             <flux:subheading size="lg">Monitor all user activity over the last 365 days for security.</flux:subheading>
         </div>
         <div class="flex items-top gap-2.5">
-            @can('admin.audits.export')
+            <!-- @can('admin.audits.export')
                 <flux:button icon="arrow-up-tray" tooltip="Feature preview only. This feature is under active development.">{{ __('Export') }}</flux:button>
-            @endcan
+            @endcan -->
         </div>
     </div>
 
@@ -33,7 +33,7 @@
                             </div>
                             <div>
                                 <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button>
-                                <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>    
+                                <!-- <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>     -->
                             </div>
                         </div>
                         <div class="inline-block min-w-full py-2 align-middle">
