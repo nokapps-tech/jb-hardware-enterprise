@@ -36,6 +36,8 @@ class Contact extends Model
      */
     protected $fillable = ['first_name', 'last_name', 'email', 'phone', 'company_id', 'job_title'];
 
+    protected $appends = ['name'];
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -43,6 +45,16 @@ class Contact extends Model
     public function company()
     {
         return $this->belongsTo(\App\Models\Company::class, 'company_id', 'id');
+    }
+
+    public function getNameAttribute(): string
+    {
+        $parts = array_filter([
+            $this->first_name,
+            $this->last_name,
+        ]);
+
+        return implode(' ', $parts) ?: '(No Name)';
     }
     
 }

@@ -24,7 +24,7 @@ class ContactForm extends Form
 			'email' => 'string',
 			'phone' => 'string',
 			'job_title' => 'string',
-            'company_id' => 'nullable|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
         ];
     }
 

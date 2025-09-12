@@ -24,7 +24,7 @@ class ProductForm extends Form
             'product_code' => 'required|string',
             'sku' => 'required|string',
             'name' => 'required|string',
-            'product_category_id' => 'nullable|exists:product_categories,id',
+            'product_category_id' => 'required|exists:product_categories,id',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
             'cost' => 'nullable|numeric',
