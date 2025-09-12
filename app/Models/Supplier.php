@@ -39,17 +39,17 @@ class Supplier extends Model
 
     // Predefined choices
     public const TYPES = [
-        'manufacturer',
-        'distributor',
-        'wholesaler',
-        'retailer',
+        'Manufacturer',
+        'Distributor',
+        'Wholesaler',
+        'Retailer',
     ];
 
     public const SEGMENTS = [
-        'raw_materials',
-        'office_supplies',
-        'equipment',
-        'services',
+        'Raw materials',
+        'Office supplies',
+        'Equipment',
+        'Services',
     ];
 
     /**
