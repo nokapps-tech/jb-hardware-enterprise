@@ -3,6 +3,7 @@
 namespace App\Livewire\ProductCategories;
 
 use App\Models\ProductCategory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,8 +16,10 @@ class Index extends Component
 
     public function render(): View
     {
-        # TODO: Add columns to search on with $search here
-        $productCategories = ProductCategory::orderBy('updated_at', 'desc')
+        $productCategories = ProductCategory::when($this->search !== '', function (Builder $query) {
+                $query->where('name','like', '%'.$this->search.'%');
+            })
+            ->orderBy('updated_at', 'desc')
             ->paginate();
 
         return view('livewire.product-category.index', [

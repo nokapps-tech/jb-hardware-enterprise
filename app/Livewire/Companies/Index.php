@@ -3,6 +3,7 @@
 namespace App\Livewire\Companies;
 
 use App\Models\Company;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,8 +16,13 @@ class Index extends Component
 
     public function render(): View
     {
-        # TODO: Add columns to search on with $search here
-        $companies = Company::orderBy('updated_at', 'desc')
+        $companies = Company::when($this->search !== '', function (Builder $query) {
+                $query->where(function ($q) {
+                    $q->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('industry', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->orderBy('updated_at', 'desc')
             ->paginate();
 
         return view('livewire.company.index', [

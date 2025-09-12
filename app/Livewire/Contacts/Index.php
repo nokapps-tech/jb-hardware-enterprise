@@ -3,6 +3,7 @@
 namespace App\Livewire\Contacts;
 
 use App\Models\Contact;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,10 +16,14 @@ class Index extends Component
 
     public function render(): View
     {
-        # TODO: Add columns to search on with $search here
-        $contacts = Contact::orderBy('updated_at', 'desc')
+        $contacts = Contact::when($this->search !== '', function (Builder $query) {
+                $query->where(function ($q) {
+                    $q->where('first_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->orderBy('updated_at', 'desc')
             ->paginate();
-
         return view('livewire.contact.index', [
             'contacts' => $contacts,
             'i' => $this->getPage() * $contacts->perPage(),

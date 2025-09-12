@@ -3,6 +3,7 @@
 namespace App\Livewire\Transactions;
 
 use App\Models\Transaction;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,8 +16,10 @@ class Index extends Component
 
     public function render(): View
     {
-        # TODO: Add columns to search on with $search here
-        $transactions = Transaction::orderBy('updated_at', 'desc')
+        $transactions = Transaction::when($this->search !== '', function (Builder $query) {
+                $query->where('transaction_number','like', '%'.$this->search.'%');
+            })
+            ->orderBy('updated_at', 'desc')
             ->paginate();
 
         return view('livewire.transaction.index', [
