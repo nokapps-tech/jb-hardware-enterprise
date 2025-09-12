@@ -53,8 +53,14 @@
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Company Name</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $contact->company?->name ?? 'None' }}</flux:text></dd>
-                                        </div>
+                                            @if($contact->company)
+                                                <a href="{{ route('companies.show', $contact->company->id) }}" class="text-blue-600 hover:underline">
+                                                    {{ $contact->company->name }}
+                                                </a>
+                                            @else
+                                                <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $contact->company?->name ?? 'None' }}</flux:text></dd>
+                                            @endif
+                                            </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Job Title</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $contact->job_title ?? 'None' }}</flux:text></dd>
