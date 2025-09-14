@@ -38,7 +38,7 @@
                                 <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search contacts"/>
                             </div>
                             <div>
-                                <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button>
+                                <!-- <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button> -->
                                 <!-- <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>     -->
                             </div>
                         </div>
