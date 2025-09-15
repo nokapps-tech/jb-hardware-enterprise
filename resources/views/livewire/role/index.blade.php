@@ -16,12 +16,12 @@
             <flux:subheading size="lg">View and manage all roles.</flux:subheading>
         </div>
         <div class="flex items-top gap-2.5">
-            @can('admin.roles.import')
+            <!-- @can('admin.roles.import')
                 <flux:button icon="arrow-down-tray" tooltip="Feature preview only. This feature is under active development.">{{ __('Import') }}</flux:button>
             @endcan
             @can('admin.roles.export')
                 <flux:button icon="arrow-up-tray" tooltip="Feature preview only. This feature is under active development.">{{ __('Export') }}</flux:button>
-            @endcan
+            @endcan -->
             @can('admin.roles.create')
                 <flux:button variant="primary" :href="route('roles.create')" icon="plus">{{ __('Add New') }}</flux:button>
             @endcan
@@ -38,8 +38,8 @@
                                 <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search roles"/>
                             </div>
                             <div>
-                                <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button>
-                                <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>    
+                                <!-- <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button>
+                                <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>     -->
                             </div>
                         </div>
                         <div class="inline-block min-w-full py-2 align-middle">
@@ -48,9 +48,9 @@
                                 <tr>
                                     										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Display Text</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Name</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Guard Name</flux:text></th>
+										<!-- <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Guard Name</flux:text></th> -->
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Description</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Readonly</flux:text></th>
+										<!-- <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Readonly</flux:text></th> -->
 
                                     <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide" width="1%"></th>
                                 </tr>
@@ -60,9 +60,9 @@
                                     <tr class="hover:bg-gray-50 hover:dark:bg-zinc-700" wire:key="{{ $role->id }}">
                                         											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $role->display_text }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $role->name }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $role->guard_name }}</flux:text></td>
+											<!-- <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $role->guard_name }}</flux:text></td> -->
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $role->description }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $role->readonly }}</flux:text></td>
+											<!-- <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $role->readonly }}</flux:text></td> -->
 
                                         <td class="whitespace-nowrap px-3 py-4 flex gap-1 text-sm font-medium text-gray-900">
                                             @can('admin.roles.show')

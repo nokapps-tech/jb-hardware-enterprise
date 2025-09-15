@@ -19,10 +19,10 @@ class RoleForm extends Form
     {
         return [
 			'display_text' => 'required|string',
-			'name' => 'required|string',
-			'guard_name' => 'required|string',
+			'name' => 'nullable|string',
+			'guard_name' => 'nullable|string',
 			'description' => 'nullable|string',
-			'readonly' => 'required',
+			'readonly' => 'nullable',
         ];
     }
 
@@ -39,14 +39,27 @@ class RoleForm extends Form
 
     public function store(): void
     {
-        $this->roleModel->create($this->validate());
+        $validated = $this->validate();
+
+        $validated['name'] = strtolower(str_replace(' ', '-', $validated['display_text']));
+        $validated['guard_name'] = 'web';
+        $validated['readonly'] = 1;
+        
+        Role::create($validated);
 
         $this->reset();
     }
 
     public function update(): void
     {
-        $this->roleModel->update($this->validate());
+        $validated = $this->validate();
+
+        // format before updating
+        $validated['name'] = strtolower(str_replace(' ', '-', $validated['display_text']));
+        $validated['guard_name'] = 'web';
+        $validated['readonly'] = 1;
+
+        $this->roleModel->update($validated);
 
         $this->reset();
     }

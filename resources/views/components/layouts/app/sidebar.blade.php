@@ -44,6 +44,9 @@
                     @can('admin.users.index')
                         <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('users.*')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
                     @endcan
+                    @can('admin.roles.index')
+                        <flux:navlist.item icon="user-round-cog" :href="route('roles.index')" :current="request()->routeIs('roles.*')" wire:navigate>{{ __('Roles') }}</flux:navlist.item>
+                    @endcan
                     @can('admin.audits.index')
                         <flux:navlist.item icon="shield-check" :href="route('audits.index')" :current="request()->routeIs('audits.*')" wire:navigate>{{ __('Audit Log') }}</flux:navlist.item>
                     @endcan

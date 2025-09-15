@@ -32,6 +32,13 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/audits/{audit}', \App\Livewire\Audits\Show::class)->name('audits.show')->middleware('can:admin.audits.show');
     });
 
+     Route::middleware('can:admin.roles.index')->group(function () {
+        Route::get('/roles', \App\Livewire\Roles\Index::class)->name('roles.index');
+        Route::get('/roles/create', \App\Livewire\Roles\Create::class)->name('roles.create')->middleware('can:admin.roles.create');
+        Route::get('/roles/{role}', \App\Livewire\Roles\Show::class)->name('roles.show')->middleware('can:admin.roles.show');
+        Route::get('/roles/{role}/edit', \App\Livewire\Roles\Edit::class)->name('roles.edit')->middleware('can:admin.roles.edit');
+    });
+
     Route::middleware('can:admin.companies.index')->group(function () {
         Route::get('/companies', \App\Livewire\Companies\Index::class)->name('companies.index');
         Route::get('/companies/create', \App\Livewire\Companies\Create::class)->name('companies.create');
@@ -74,12 +81,6 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/transactions/{transaction}/edit', \App\Livewire\Transactions\Edit::class)->name('transactions.edit');
     });
 
-    // Route::middleware('can:admin.roles.index')->group(function () {
-    //     Route::get('/roles', \App\Livewire\Roles\Index::class)->name('roles.index');
-    //     Route::get('/roles/create', \App\Livewire\Roles\Create::class)->name('roles.create')->middleware('can:admin.roles.create');
-    //     Route::get('/roles/{role}', \App\Livewire\Roles\Show::class)->name('roles.show')->middleware('can:admin.roles.show');
-    //     Route::get('/roles/{role}/edit', \App\Livewire\Roles\Edit::class)->name('roles.edit')->middleware('can:admin.roles.edit');
-    // });
 
 });
 
