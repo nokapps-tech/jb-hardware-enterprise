@@ -66,7 +66,7 @@
                                                 </div>
                                             </div>
                                         </flux:text></td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $user->role?->name ?? 'Member' }}</flux:text></td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $user->roles->first()->display_text ?? 'Member' }}</flux:text></td>
                                         <td class="whitespace-nowrap px-3 py-4">
                                             @if ($user->email_verified_at)
                                                 <flux:icon.check-circle class="text-lime-700 dark:text-lime-300" />

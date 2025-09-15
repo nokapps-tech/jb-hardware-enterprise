@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
-use Spatie\Permission\Traits\HasRoles;
-
+use Spatie\Permission\Models\Role as SpatieRole;
 /**
  * Class Role
  *
@@ -27,10 +26,12 @@ use Spatie\Permission\Traits\HasRoles;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Role extends Model implements Auditable
+class Role extends SpatieRole  implements Auditable
 {
     use SoftDeletes;
-    use Notifiable, HasRoles, AuditableTrait;
+    use Notifiable, AuditableTrait;
+
+    protected $guard_name = 'web';
 
     protected $perPage = 20;
 

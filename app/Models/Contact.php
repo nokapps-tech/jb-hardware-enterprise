@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
-use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class Contact
@@ -30,7 +29,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Contact extends Model implements Auditable
 {
     use SoftDeletes;
-    use Notifiable, HasRoles, AuditableTrait;
+    use Notifiable, AuditableTrait;
 
     protected $perPage = 20;
 

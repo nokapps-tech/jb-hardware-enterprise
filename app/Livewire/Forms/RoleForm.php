@@ -45,7 +45,10 @@ class RoleForm extends Form
         $this->description = $this->roleModel->description;
         $this->readonly = $this->roleModel->readonly;
         
-        $this->permissions = $this->roleModel->permissions->pluck('name')->toArray();
+        $this->permissions = $this->roleModel
+            ->permissions()
+            ->pluck('name')
+            ->toArray();
     }
 
     public function store(): void
@@ -56,7 +59,7 @@ class RoleForm extends Form
         $validated['guard_name'] = 'web';
         $validated['readonly'] = 1;
 
-        Role::create($validated);
+        $role = Role::create($validated);
 
         if (!empty($this->permissions)) {
             $role->syncPermissions($this->permissions);

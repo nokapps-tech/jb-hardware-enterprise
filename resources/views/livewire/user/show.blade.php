@@ -41,6 +41,10 @@
                                     <dt class="text-sm font-medium leading-6 text-gray-900"><flux:text variant="strong">Email</flux:text></dt>
                                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><flux:text>{{ $user->email }}</flux:text></dd>
                                 </div>
+                                <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                    <dt class="text-sm font-medium leading-6 text-gray-900"><flux:text variant="strong">Roles</flux:text></dt>
+                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-3 sm:mt-0"><flux:text>{{ $user->roles->first()->display_text ?? '--' }}</flux:text></dd>
+                                </div>
 
                             </dl>
                         </div>

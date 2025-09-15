@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SystemPermissionSeeder::class);
         $this->call(UserPermissionSeeder::class);
         $this->call(AuditPermissionSeeder::class);
+        $this->call(ModulePermissionSeeder::class);
 
         // Generate mock data
-        User::factory(10)->create();
+        // User::factory(10)->create();
     }
 }

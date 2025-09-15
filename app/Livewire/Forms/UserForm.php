@@ -4,6 +4,8 @@ namespace App\Livewire\Forms;
 
 use App\Models\User;
 use Livewire\Form;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserForm extends Form
 {
@@ -11,12 +13,14 @@ class UserForm extends Form
     
     public $name = '';
     public $email = '';
+    public $role = '';
 
     public function rules(): array
     {
         return [
 			'name' => 'required|string',
 			'email' => 'required|string',
+            'role' => 'nullable|string|exists:roles,name',
         ];
     }
 
@@ -26,18 +30,44 @@ class UserForm extends Form
         
         $this->name = $this->userModel->name;
         $this->email = $this->userModel->email;
+        $this->role = $this->userModel->roles()->first()?->name ?? '';
     }
 
     public function store(): void
     {
-        $this->userModel->create($this->validate());
+        $validated = $this->validate();
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        if (!empty($validated['role'])) {
+        $user->assignRole($validated['role']);
+        } 
+        else {
+            $user->assignRole('user');
+        }
 
         $this->reset();
     }
 
     public function update(): void
     {
-        $this->userModel->update($this->validate());
+        $validated = $this->validate();
+
+        $data = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ];
+        $this->userModel->update($data);
+
+        if (!empty($validated['role'])) {
+            $this->userModel->syncRoles([$validated['role']]);
+        }
 
         $this->reset();
     }
