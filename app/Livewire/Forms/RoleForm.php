@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Models\Role;
 use Livewire\Form;
+use Spatie\Permission\Models\Permission;
 
 class RoleForm extends Form
 {
@@ -14,6 +15,7 @@ class RoleForm extends Form
     public $guard_name = '';
     public $description = '';
     public $readonly = '';
+    public $permissions = [];
 
     public function rules(): array
     {
@@ -23,8 +25,15 @@ class RoleForm extends Form
 			'guard_name' => 'nullable|string',
 			'description' => 'nullable|string',
 			'readonly' => 'nullable',
+            'permissions' => 'nullable|array',
         ];
     }
+
+    public function availablePermissions()
+    {
+        return Permission::all()->groupBy('module');
+    }
+
 
     public function setRoleModel(Role $roleModel): void
     {
@@ -35,6 +44,8 @@ class RoleForm extends Form
         $this->guard_name = $this->roleModel->guard_name;
         $this->description = $this->roleModel->description;
         $this->readonly = $this->roleModel->readonly;
+        
+        $this->permissions = $this->roleModel->permissions->pluck('name')->toArray();
     }
 
     public function store(): void
@@ -44,8 +55,12 @@ class RoleForm extends Form
         $validated['name'] = strtolower(str_replace(' ', '-', $validated['display_text']));
         $validated['guard_name'] = 'web';
         $validated['readonly'] = 1;
-        
+
         Role::create($validated);
+
+        if (!empty($this->permissions)) {
+            $role->syncPermissions($this->permissions);
+        }
 
         $this->reset();
     }
@@ -60,6 +75,8 @@ class RoleForm extends Form
         $validated['readonly'] = 1;
 
         $this->roleModel->update($validated);
+
+        $this->roleModel->syncPermissions($this->permissions);
 
         $this->reset();
     }
