@@ -19,7 +19,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property $description
  * @property $price
  * @property $cost
- * @property $stock
+ * @property $quantity
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
@@ -40,7 +40,7 @@ class Product extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['product_code', 'sku', 'name', 'product_category_id', 'description', 'price', 'cost', 'stock', 'threshold'];
+    protected $fillable = ['product_code', 'sku', 'name', 'product_category_id', 'description', 'price', 'cost', 'quantity', 'threshold'];
 
 
     /**

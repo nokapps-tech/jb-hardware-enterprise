@@ -43,9 +43,9 @@ class Create extends Component
             if ($this->form->status === 'Completed') {
                 $product = $transaction->product;
                 if ($this->form->type === 'In') {
-                    $product->increment('stock', $this->form->quantity);
+                    $product->increment('quantity', $this->form->quantity);
                 } elseif ($this->form->type === 'Out') {
-                    $product->decrement('stock', $this->form->quantity);
+                    $product->decrement('quantity', $this->form->quantity);
                 }
             }
 

@@ -34,9 +34,9 @@ class Edit extends Component
             if ($transaction->status === 'Completed') {
                 $product = $transaction->product;
                 if ($transaction->type === 'In') {
-                    $product->decrement('stock', $transaction->quantity);
+                    $product->decrement('quantity', $transaction->quantity);
                 } elseif ($transaction->type === 'Out') {
-                    $product->increment('stock', $transaction->quantity);
+                    $product->increment('quantity', $transaction->quantity);
                 }
             }
 
@@ -54,9 +54,9 @@ class Edit extends Component
             if ($transaction->status === 'Completed') {
                 $product = $transaction->product;
                 if ($transaction->type === 'In') {
-                    $product->increment('stock', $transaction->quantity);
+                    $product->increment('quantity', $transaction->quantity);
                 } elseif ($transaction->type === 'Out') {
-                    $product->decrement('stock', $transaction->quantity);
+                    $product->decrement('quantity', $transaction->quantity);
                 }
             }
 

@@ -16,7 +16,7 @@ class ProductForm extends Form
     public $description = '';
     public $price = '';
     public $cost = '';
-    public $stock = '';
+    public $quantity = '';
     public $threshold = '';
 
     public function rules(): array
@@ -29,7 +29,7 @@ class ProductForm extends Form
             'description' => 'nullable|string',
             'price' => 'nullable|numeric|min:0',
             'cost' => 'nullable|numeric|min:0',
-            'stock' => 'required|integer|min:0',
+            'quantity' => 'required|integer|min:0',
             'threshold' => 'nullable|integer|min:0',
         ];
     }
@@ -45,7 +45,7 @@ class ProductForm extends Form
         $this->description = $this->productModel->description;
         $this->price = $this->productModel->price;
         $this->cost = $this->productModel->cost;
-        $this->stock = $this->productModel->stock;
+        $this->quantity = $this->productModel->quantity;
         $this->threshold = $this->productModel->threshold;
     }
 

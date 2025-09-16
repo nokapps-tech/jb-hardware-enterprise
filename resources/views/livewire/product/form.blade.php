@@ -30,7 +30,7 @@
         <flux:input wire:model="form.cost" :label="__('Cost')" type="text" autocomplete="form.cost"/>
     </div>
     <div>
-        <flux:input wire:model="form.stock" :label="__('Stock')" type="text" autocomplete="form.stock"/>
+        <flux:input wire:model="form.quantity" :label="__('Quantity')" type="text" autocomplete="form.quantity"/>
     </div>
     <div>
         <flux:input wire:model="form.threshold" :label="__('Threshold')" type="text" autocomplete="form.threshold"/>
