@@ -54,6 +54,7 @@
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Price</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Cost</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Stock</flux:text></th>
+                                        <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Threshold</flux:text></th>
 
                                     <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide" width="1%"></th>
                                 </tr>
@@ -77,7 +78,7 @@
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->price }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->cost }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->stock }}</flux:text></td>
-
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->threshold }}</flux:text></td>
                                         <td class="whitespace-nowrap px-3 py-4 flex gap-1 text-sm font-medium text-gray-900">
                                             @can('admin.products.show')
                                                 <flux:button variant="ghost" href="{{ route('products.show', $product->id) }}" icon="magnifying-glass" class="mr-2" size="xs" tooltip="View details">

@@ -32,6 +32,9 @@
     <div>
         <flux:input wire:model="form.stock" :label="__('Stock')" type="text" autocomplete="form.stock"/>
     </div>
+    <div>
+        <flux:input wire:model="form.threshold" :label="__('Threshold')" type="text" autocomplete="form.threshold"/>
+    </div>
 
     <div class="flex items-center gap-4">
         <flux:button variant="primary" type="submit">{{ __('Submit') }}</flux:button>
