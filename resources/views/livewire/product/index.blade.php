@@ -61,8 +61,11 @@
                                 </thead>
                                 <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
                                 @foreach ($products as $product)
-                                    <tr class="hover:bg-gray-50 hover:dark:bg-zinc-700" wire:key="{{ $product->id }}">
-                                        											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->product_code }}</flux:text></td>
+                                    <tr 
+                                        wire:key="{{ $product->id }}" 
+                                        class="hover:bg-gray-50 hover:dark:bg-zinc-700 {{ $product->quantity <= $product->threshold ? 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100' : '' }}"
+                                    >
+                                        	<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->product_code }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->sku }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->name }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
