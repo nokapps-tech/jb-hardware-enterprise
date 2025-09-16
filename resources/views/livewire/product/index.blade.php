@@ -131,3 +131,11 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('stock-alert', (event) => {
+            alert(event.message);
+        });
+    });
+</script>

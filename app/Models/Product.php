@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ProductStockLow;
+use App\Models\User;
 
 /**
  * Class Product
@@ -49,6 +52,16 @@ class Product extends Model implements Auditable
     public function productCategory()
     {
         return $this->belongsTo(\App\Models\ProductCategory::class, 'product_category_id', 'id');
+    }
+
+    protected static function booted()
+    {
+        static::updated(function ($product) {
+            if ($product->quantity <= $product->threshold && $product->quantity > 0) {
+                $admins = User::role(['system-administrator', 'developer'])->get();
+                Notification::send($admins, new ProductStockLow($product));
+            }
+        });
     }
     
 }

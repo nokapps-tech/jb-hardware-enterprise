@@ -56,6 +56,7 @@
             <flux:spacer />
 
             <flux:navlist variant="outline">
+                @livewire('notification-bell')
                 @can('admin.account.edit')
                     <flux:navlist.item icon="cog-6-tooth" :href="route('settings.profile')" :current="request()->routeIs('settings.*')"  wire:navigate>
                     {{ __('Settings') }}
