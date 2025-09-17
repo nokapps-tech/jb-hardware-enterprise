@@ -23,9 +23,6 @@
                     @can('admin.products.index')
                         <flux:navlist.item icon="boxes" :href="route('products.index')" :current="request()->routeIs('products.*')" wire:navigate>{{ __('Products') }}</flux:navlist.item>
                     @endcan
-                    @can('admin.suppliers.index')
-                        <flux:navlist.item icon="package" :href="route('suppliers.index')" :current="request()->routeIs('suppliers.*')" wire:navigate>{{ __('Suppliers') }}</flux:navlist.item>
-                    @endcan
                     @can('admin.transactions.index')
                         <flux:navlist.item icon="arrow-right-left" :href="route('transactions.index')" :current="request()->routeIs('transactions.*')" wire:navigate>{{ __('Transactions') }}</flux:navlist.item>
                     @endcan
@@ -35,8 +32,8 @@
                     @can('admin.companies.index')
                         <flux:navlist.item icon="building-2" :href="route('companies.index')" :current="request()->routeIs('companies.*')" wire:navigate>{{ __('Companies') }}</flux:navlist.item>
                     @endcan
-                    @can('admin.contacts.index')
-                        <flux:navlist.item icon="contact" :href="route('contacts.index')" :current="request()->routeIs('contacts.*')" wire:navigate>{{ __('Contacts') }}</flux:navlist.item>
+                    @can('admin.suppliers.index')
+                        <flux:navlist.item icon="package" :href="route('suppliers.index')" :current="request()->routeIs('suppliers.*')" wire:navigate>{{ __('Suppliers') }}</flux:navlist.item>
                     @endcan
                 </flux:navlist.group>
 

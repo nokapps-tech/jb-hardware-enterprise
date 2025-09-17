@@ -46,13 +46,6 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/companies/{company}/edit', \App\Livewire\Companies\Edit::class)->name('companies.edit');
     });
 
-    Route::middleware('can:admin.contacts.index')->group(function () {
-        Route::get('/contacts', \App\Livewire\Contacts\Index::class)->name('contacts.index');
-        Route::get('/contacts/create', \App\Livewire\Contacts\Create::class)->name('contacts.create');
-        Route::get('/contacts/{contact}', \App\Livewire\Contacts\Show::class)->name('contacts.show');
-        Route::get('/contacts/{contact}/edit', \App\Livewire\Contacts\Edit::class)->name('contacts.edit');
-    });
-
     Route::middleware('can:admin.product-categories.index')->group(function () {
         Route::get('/product-categories', \App\Livewire\ProductCategories\Index::class)->name('product-categories.index');
         Route::get('/product-categories/create', \App\Livewire\ProductCategories\Create::class)->name('product-categories.create');
