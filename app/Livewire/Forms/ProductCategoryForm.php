@@ -10,13 +10,13 @@ class ProductCategoryForm extends Form
     public ?ProductCategory $productCategoryModel;
     
     public $name = '';
-    public $description = '';
+    public $notes = '';
 
     public function rules(): array
     {
         return [
 			'name' => 'required|string',
-			'description' => 'nullable|string',
+			'notes' => 'nullable|string',
         ];
     }
 
@@ -25,7 +25,7 @@ class ProductCategoryForm extends Form
         $this->productCategoryModel = $productCategoryModel;
         
         $this->name = $this->productCategoryModel->name;
-        $this->description = $this->productCategoryModel->description;
+        $this->notes = $this->productCategoryModel->notes;
     }
 
     public function store(): void

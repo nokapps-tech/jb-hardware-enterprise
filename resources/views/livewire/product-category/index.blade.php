@@ -47,7 +47,7 @@
                                 <thead>
                                 <tr>
                                     										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Name</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Description</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Notes</flux:text></th>
 
                                     <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide" width="1%"></th>
                                 </tr>
@@ -56,7 +56,7 @@
                                 @foreach ($productCategories as $productCategory)
                                     <tr class="hover:bg-gray-50 hover:dark:bg-zinc-700" wire:key="{{ $productCategory->id }}">
                                         											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $productCategory->name }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $productCategory->description }}</flux:text></td>
+											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $productCategory->notes }}</flux:text></td>
 
                                         <td class="whitespace-nowrap px-3 py-4 flex gap-1 text-sm font-medium text-gray-900">
                                             @can('admin.productCategories.show')

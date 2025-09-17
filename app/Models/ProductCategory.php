@@ -13,7 +13,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  *
  * @property $id
  * @property $name
- * @property $description
+ * @property $notes
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
@@ -33,7 +33,7 @@ class ProductCategory extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'notes'];
 
 
 }
