@@ -9,24 +9,24 @@ class SupplierForm extends Form
 {
     public ?Supplier $supplierModel;
     
-    public $name = '';
-    public $segment = '';
-    public $type = '';
+    public $company_id = '';
+    public $contact_person = '';
     public $email = '';
     public $phone = '';
-    public $contact_id = '';
     public $address = '';
+    public $segment = '';
+    public $type = '';
 
     public function rules(): array
     {
         return [
-			'name' => 'required|string',
+            'company_id' => 'required|exists:companies,id',
+			'contact_person' => 'nullable|string',
+            'email' => 'nullable|string',
+			'phone' => 'nullable|string',
+			'address' => 'nullable|string',
 			'segment' => 'nullable|string',
             'type' => 'nullable|string',
-			'email' => 'nullable|string',
-			'phone' => 'nullable|string',
-            'contact_id' => 'required|exists:contacts,id',
-			'address' => 'nullable|string',
         ];
     }
 
@@ -34,13 +34,13 @@ class SupplierForm extends Form
     {
         $this->supplierModel = $supplierModel;
         
-        $this->name = $this->supplierModel->name;
-        $this->segment = $this->supplierModel->segment;
-        $this->type = $this->supplierModel->type;
+        $this->company_id = $this->supplierModel->company_id;
+        $this->contact_person = $this->supplierModel->contact_person;
         $this->email = $this->supplierModel->email;
         $this->phone = $this->supplierModel->phone;
-        $this->contact_id = $this->supplierModel->contact_id;
         $this->address = $this->supplierModel->address;
+        $this->segment = $this->supplierModel->segment;
+        $this->type = $this->supplierModel->type;
     }
 
     public function store(): void

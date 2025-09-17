@@ -46,13 +46,13 @@
                             <table class="w-full divide-y divide-zinc-300 dark:divide-zinc-600">
                                 <thead>
                                 <tr>
-                                    										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Name</flux:text></th>
+                                        <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Company</flux:text></th>
+                                    	<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Contact Person</flux:text></th>
+                                        <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Email</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Phone</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Address</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Segment</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Type</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Email</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Phone</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Contact Id</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Address</flux:text></th>
 
                                     <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide" width="1%"></th>
                                 </tr>
@@ -60,22 +60,21 @@
                                 <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
                                 @foreach ($suppliers as $supplier)
                                     <tr class="hover:bg-gray-50 hover:dark:bg-zinc-700" wire:key="{{ $supplier->id }}">
-                                        											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->name }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->segment }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->type }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->email }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->phone }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                @if($supplier->contact)
-                                                    <a href="{{ route('contacts.show', $supplier->contact->id) }}" class="text-blue-600 hover:underline">
-                                                        {{ $supplier->contact->name }}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                @if($supplier->company)
+                                                    <a href="{{ route('companies.show', $supplier->company->id) }}" class="text-blue-600 hover:underline">
+                                                        {{ $supplier->company->name }}
                                                     </a>
                                                 @else
                                                     <span class="text-gray-400">—</span>
                                                 @endif
                                             </td>
+                                        	<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->contact_person }}</flux:text></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->email }}</flux:text></td>
+											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->phone }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->address }}</flux:text></td>
-
+											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->segment }}</flux:text></td>
+											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $supplier->type }}</flux:text></td>
                                         <td class="whitespace-nowrap px-3 py-4 flex gap-1 text-sm font-medium text-gray-900">
                                             @can('admin.suppliers.show')
                                                 <flux:button variant="ghost" href="{{ route('suppliers.show', $supplier->id) }}" icon="magnifying-glass" class="mr-2" size="xs" tooltip="View details">

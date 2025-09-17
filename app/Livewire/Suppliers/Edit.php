@@ -4,7 +4,7 @@ namespace App\Livewire\Suppliers;
 
 use App\Livewire\Forms\SupplierForm;
 use App\Models\Supplier;
-use App\Models\Contact;
+use App\Models\Company;
 use Livewire\Component;
 
 class Edit extends Component
@@ -32,7 +32,7 @@ class Edit extends Component
     public function render()
     {
         return view('livewire.supplier.edit', [
-            'contacts' => Contact::orderBy('first_name')->get(),
+            'companies' => Company::orderBy('name')->get(),
             'supplier' => $this->form->supplierModel,
         ]);
     }

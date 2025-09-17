@@ -30,18 +30,24 @@
                                 <div class="px-4 pb-6 sm:px-0">
                                     <flux:heading size="lg" level="2">Supplier Details</flux:heading>
                                 </div>
-                                
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Name</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->name ?? 'None' }}</flux:text></dd>
+                                            <dt class="text-sm font-medium leading-6">
+                                                <flux:text variant="strong">Company Name</flux:text>
+                                            </dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
+                                                @if($supplier->company)
+                                                    <a href="{{ route('companies.show', $supplier->company->id) }}" 
+                                                    class="text-blue-600 hover:underline">
+                                                        {{ $supplier->company->name }}
+                                                    </a>
+                                                @else
+                                                    <flux:text>{{ $supplier->company?->name ?? 'None' }}</flux:text>
+                                                @endif
+                                            </dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Segment</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->segment ?? 'None' }}</flux:text></dd>
-                                        </div>
-                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Type</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->type ?? 'None' }}</flux:text></dd>
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Contact Person</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->contact_person ?? 'None' }}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Email</flux:text></dt>
@@ -52,27 +58,16 @@
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->phone ?? 'None' }}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Contact Id</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->contact_id ?? 'None' }}</flux:text></dd>
-                                        </div>
-                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6">
-                                                <flux:text variant="strong">Contact Name</flux:text>
-                                            </dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
-                                                @if($supplier->contact)
-                                                    <a href="{{ route('contacts.show', $supplier->contact->id) }}" 
-                                                    class="text-blue-600 hover:underline">
-                                                        {{ $supplier->contact->name }}
-                                                    </a>
-                                                @else
-                                                    <flux:text>{{ $supplier->contact?->name ?? 'None' }}</flux:text>
-                                                @endif
-                                            </dd>
-                                        </div>
-                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Address</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->address ?? 'None' }}</flux:text></dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Segment</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->segment ?? 'None' }}</flux:text></dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Type</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $supplier->type ?? 'None' }}</flux:text></dd>
                                         </div>
 
                             </dl>

@@ -12,18 +12,18 @@ use OwenIt\Auditing\Contracts\Auditable;
  * Class Supplier
  *
  * @property $id
- * @property $name
- * @property $segment
- * @property $type
+ * @property $company_id
+ * @property $contact_person
  * @property $email
  * @property $phone
- * @property $contact_id
  * @property $address
+ * @property $segment
+ * @property $type
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at
  *
- * @property Contact $contact
+ * @property Company $company
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -40,7 +40,7 @@ class Supplier extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'segment', 'type', 'email', 'phone', 'contact_id', 'address'];
+    protected $fillable = ['company_id', 'contact_person', 'email', 'phone', 'address', 'segment', 'type'];
 
     // Predefined choices
     public const TYPES = [
@@ -60,9 +60,9 @@ class Supplier extends Model implements Auditable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function contact()
+    public function company()
     {
-        return $this->belongsTo(\App\Models\Contact::class, 'contact_id', 'id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id', 'id');
     }
     
 }
