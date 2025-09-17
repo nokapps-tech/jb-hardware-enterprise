@@ -23,7 +23,7 @@ class ProductCategoryRequest extends FormRequest
     {
         return [
 			'name' => 'required|string',
-			'description' => 'string',
+			'notes' => 'nullable|string',
         ];
     }
 }
