@@ -36,10 +36,6 @@
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->product_code ?? 'None' }}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Sku</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->sku ?? 'None' }}</flux:text></dd>
-                                        </div>
-                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Name</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->name ?? 'None' }}</flux:text></dd>
                                         </div>
@@ -63,8 +59,8 @@
                                             </dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Description</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->description ?? 'None' }}</flux:text></dd>
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Notes</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->notes ?? 'None' }}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Price</flux:text></dt>
@@ -73,6 +69,14 @@
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Cost</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->cost ?? 'None' }}</flux:text></dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Size</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->size ?? 'None' }}</flux:text></dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Unit</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->unit ?? 'None' }}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Quantity</flux:text></dt>

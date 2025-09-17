@@ -47,12 +47,13 @@
                                 <thead>
                                 <tr>
                                     										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product Code</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Sku</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Name</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product Category</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Description</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Notes</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Price</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Cost</flux:text></th>
+                                        <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Size</flux:text></th>
+                                        <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Unit</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Quantity</flux:text></th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Threshold</flux:text></th>
 
@@ -66,7 +67,6 @@
                                         class="hover:bg-gray-50 hover:dark:bg-zinc-700 {{ $product->quantity <= $product->threshold ? 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100' : '' }}"
                                     >
                                         	<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->product_code }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->sku }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->name }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
                                                 @if($product->productCategory)
@@ -80,6 +80,8 @@
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->description }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->price }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->cost }}</flux:text></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->size }}</flux:text></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->unit }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->quantity }}</flux:text></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->threshold }}</flux:text></td>
                                         <td class="whitespace-nowrap px-3 py-4 flex gap-1 text-sm font-medium text-gray-900">

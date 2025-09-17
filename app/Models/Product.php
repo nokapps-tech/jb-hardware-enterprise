@@ -43,7 +43,7 @@ class Product extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['product_code', 'sku', 'name', 'product_category_id', 'description', 'price', 'cost', 'quantity', 'threshold'];
+    protected $fillable = ['product_code', 'name', 'product_category_id', 'notes', 'price', 'cost', 'size', 'unit', 'quantity', 'threshold'];
 
 
     /**
