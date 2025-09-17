@@ -62,7 +62,7 @@ class ProductForm extends Form
         
         // Check threshold and trigger browser event
         if ($this->productModel->quantity <= $this->productModel->threshold && $this->productModel->quantity > 0) {
-            $this->dispatch('stock-alert', message: "{$this->productModel->name} stock is low! (Stock: {$this->productModel->stock}, Threshold: {$this->productModel->threshold})");
+            $this->dispatch('stock-alert', message: "{$this->productModel->name} stock is low! (Stock: {$this->productModel->quantity}, Threshold: {$this->productModel->threshold})");
         }
 
         $this->reset();
