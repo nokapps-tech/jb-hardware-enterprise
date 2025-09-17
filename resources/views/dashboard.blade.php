@@ -1,11 +1,12 @@
 <x-layouts.app>
     @section('title', 'Dashboard')
 
-    <div class="mb-6">
+    <div class="mb-6 flex justify-between">
         <flux:breadcrumbs>
             <flux:breadcrumbs.item icon="home" />
             <flux:breadcrumbs.item>Dashboard</flux:breadcrumbs.item>
         </flux:breadcrumbs>
+         @livewire('notification-bell')
     </div>
 
     <flux:separator />
