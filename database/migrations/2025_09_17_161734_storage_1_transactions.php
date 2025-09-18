@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('storage_1_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_number');
+            $table->unsignedBigInteger('transaction_number')->unique();
+            $table->foreignId('supplier_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
             $table->string('type')->index();
             $table->integer('quantity');
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('storage_1_transactions');
     }
 };

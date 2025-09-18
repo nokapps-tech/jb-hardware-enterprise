@@ -23,8 +23,17 @@
                     @can('admin.products.index')
                         <flux:navlist.item icon="boxes" :href="route('products.index')" :current="request()->routeIs('products.*')" wire:navigate>{{ __('Products') }}</flux:navlist.item>
                     @endcan
-                    @can('admin.transactions.index')
-                        <flux:navlist.item icon="arrow-right-left" :href="route('transactions.index')" :current="request()->routeIs('transactions.*')" wire:navigate>{{ __('Transactions') }}</flux:navlist.item>
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Storage A')" class="grid mb-4 font-medium">
+                    @can('admin.storage1-transactions.index')
+                        <flux:navlist.item icon="arrow-right-left" :href="route('storage1-transactions.index')" :current="request()->routeIs('storage1-transactions.*')" wire:navigate>{{ __('Storage A Transactions') }}</flux:navlist.item>
+                    @endcan
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Storage B')" class="grid mb-4 font-medium">
+                    @can('admin.storage2-transactions.index')
+                        <flux:navlist.item icon="arrow-right-left" :href="route('storage2-transactions.index')" :current="request()->routeIs('storage2-transactions.*')" wire:navigate>{{ __('Storage B Transactions') }}</flux:navlist.item>
                     @endcan
                 </flux:navlist.group>
 
