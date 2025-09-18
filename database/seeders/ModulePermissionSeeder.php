@@ -34,10 +34,11 @@ class ModulePermissionSeeder extends Seeder
         );
 
         $modules = [
-            'product_categories' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
+            'product-categories' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'products' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'suppliers' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
-            'transactions' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
+            'storage1-transactions' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
+            'storage2-transactions' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'contacts' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'companies' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'roles' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
