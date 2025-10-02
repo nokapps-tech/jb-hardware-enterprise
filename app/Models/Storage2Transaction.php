@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Auditable as AuditableTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * Class Storage2Transaction
@@ -29,9 +31,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Storage2Transaction extends Model
+class Storage2Transaction extends Model implements Auditable
 {
     use SoftDeletes;
+    use AuditableTrait;
 
     protected $table = 'storage_2_transactions';
 
