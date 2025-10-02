@@ -27,7 +27,9 @@
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.1.1",
         "livewire/volt": "^1.7.0",
+        "milon/barcode": "^12.0",
         "owen-it/laravel-auditing": "^14.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-permission": "^6.20"
     },
     "require-dev": {

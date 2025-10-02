@@ -16,13 +16,15 @@ use App\Models\User;
  *
  * @property $id
  * @property $product_code
- * @property $sku
  * @property $name
  * @property $product_category_id
- * @property $description
+ * @property $notes
  * @property $price
  * @property $cost
+ * @property $size
+ * @property $unit
  * @property $quantity
+ * @property $threshold
  * @property $created_at
  * @property $updated_at
  * @property $deleted_at

@@ -36,6 +36,14 @@
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->product_code ?? 'None' }}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Barcode</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{!! DNS1D::getBarcodeHTML($product->product_code, 'C128') !!}</flux:text></dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">QR Code</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{!! QrCode::size(150)->generate($product->product_code) !!}</flux:text></dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Name</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->name ?? 'None' }}</flux:text></dd>
                                         </div>
