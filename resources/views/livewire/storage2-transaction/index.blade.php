@@ -16,12 +16,12 @@
             <flux:subheading size="lg">View and manage all storage B Transactions.</flux:subheading>
         </div>
         <div class="flex items-top gap-2.5">
-            <!-- @can('admin.storage2Transactions.import')
+            @can('admin.storage2Transactions.import')
                 <flux:button icon="arrow-down-tray" tooltip="Feature preview only. This feature is under active development.">{{ __('Import') }}</flux:button>
             @endcan
             @can('admin.storage2Transactions.export')
                 <flux:button icon="arrow-up-tray" tooltip="Feature preview only. This feature is under active development.">{{ __('Export') }}</flux:button>
-            @endcan -->
+            @endcan
             @can('admin.storage2Transactions.create')
                 <flux:button variant="primary" :href="route('storage2-transactions.create')" icon="plus">{{ __('Add New') }}</flux:button>
             @endcan

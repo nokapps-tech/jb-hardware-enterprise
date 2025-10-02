@@ -16,12 +16,12 @@
             <flux:subheading size="lg">View and manage all roles.</flux:subheading>
         </div>
         <div class="flex items-top gap-2.5">
-            <!-- @can('admin.roles.import')
+            @can('admin.roles.import')
                 <flux:button icon="arrow-down-tray" tooltip="Feature preview only. This feature is under active development.">{{ __('Import') }}</flux:button>
             @endcan
             @can('admin.roles.export')
                 <flux:button icon="arrow-up-tray" tooltip="Feature preview only. This feature is under active development.">{{ __('Export') }}</flux:button>
-            @endcan -->
+            @endcan
             @can('admin.roles.create')
                 <flux:button variant="primary" :href="route('roles.create')" icon="plus">{{ __('Add New') }}</flux:button>
             @endcan
