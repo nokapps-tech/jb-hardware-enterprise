@@ -12,7 +12,7 @@
 
     <div class="flex flex-col xl:justify-between xl:flex-row my-6">
         <div class="mb-6">
-            <flux:heading size="xl" level="1">Edit {{ $storage A Transaction->name }}</flux:heading>
+            <flux:heading size="xl" level="1">Edit {{ $storage1Transaction->name }}</flux:heading>
             <flux:subheading size="lg">Update the information for this storage A Transaction.</flux:subheading>
         </div>
         <div class="flex items-top gap-2.5">

@@ -59,7 +59,7 @@ class Product extends Model implements Auditable
     protected static function booted()
     {
         static::updated(function ($product) {
-            if ($product->quantity <= $product->threshold && $product->quantity > 0) {
+            if ($product->quantity <= $product->threshold && $product->getOriginal('quantity') > $product->threshold) {
                 $admins = User::role(['system-administrator', 'developer'])->get();
                 Notification::send($admins, new ProductStockLow($product));
             }

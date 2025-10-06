@@ -58,3 +58,33 @@ php artisan migrate --seed
 
 # start development server
 npm run dev
+
+# To process queue, for first time setup:
+.env
+- QUEUE_CONNECTIONS= database
+
+- php artisan optimize
+- sudo apt install supervisor
+- cd /etc/supervisor/conf.d
+- vim laravel-worker.conf
+
+# Put it in the file
+[program:laravel-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=/usr/bin/php /var/www/html/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=root
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/var/www/html/worker.log
+stopwaitsecs=1
+
+
+- sudo supervisorctl reread
+
+- sudo supervisorctl update
+
+- sudo supervisorctl start "laravel-worker:*"
