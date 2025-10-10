@@ -38,8 +38,8 @@
                                 <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search transactions"/>
                             </div>
                             <div>
-                                <!-- <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button> -->
-                                <!-- <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>     -->
+                                <!-- <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button>
+                                <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>     -->
                             </div>
                         </div>
                         <div class="inline-block min-w-full py-2 align-middle">
@@ -47,6 +47,8 @@
                                 <thead>
                                 <tr>
                                     										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Transaction Number</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Branch</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Supplier</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Type</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Quantity</flux:text></th>
@@ -64,8 +66,26 @@
                                     <tr class="hover:bg-gray-50 hover:dark:bg-zinc-700" wire:key="{{ $transaction->id }}">
                                         											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->transaction_number }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                @if($transaction->branch)
+                                                    <a href="{{ route('branches.show', $transaction->branch->id) }}" class="text-blue-600 hover:underline">
+                                                        {{ $transaction->branch->name }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-gray-400">—</span>
+                                                @endif
+                                            </td>
+											<td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                @if($transaction->supplier)
+                                                    <a href="{{ route('suppliers.show', $transaction->supplier->id) }}" class="text-blue-600 hover:underline">
+                                                        {{ $transaction->supplier->contact_person }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-gray-400">—</span>
+                                                @endif
+                                            </td>
+											<td class="whitespace-nowrap px-3 py-4 text-sm">
                                                 @if($transaction->product)
-                                                    <a href="{{ route('transactions.show', $transaction->product->id) }}" class="text-blue-600 hover:underline">
+                                                    <a href="{{ route('products.show', $transaction->product->id) }}" class="text-blue-600 hover:underline">
                                                         {{ $transaction->product->name }}
                                                     </a>
                                                 @else
@@ -87,6 +107,7 @@
                                                     <span class="text-gray-400">—</span>
                                                 @endif
                                             </td>
+
                                         <td class="whitespace-nowrap px-3 py-4 flex gap-1 text-sm font-medium text-gray-900">
                                             @can('admin.transactions.show')
                                                 <flux:button variant="ghost" href="{{ route('transactions.show', $transaction->id) }}" icon="magnifying-glass" class="mr-2" size="xs" tooltip="View details">

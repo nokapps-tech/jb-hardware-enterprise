@@ -3,10 +3,10 @@
 namespace App\Livewire\Transactions;
 
 use App\Models\Transaction;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -16,10 +16,12 @@ class Index extends Component
 
     public function render(): View
     {
-        $transactions = Transaction::when($this->search !== '', function (Builder $query) {
-                $query->where('transaction_number','like', '%'.$this->search.'%');
+        $user = Auth::user();
+
+        $transactions = Transaction::orderBy('updated_at', 'desc')
+            ->when(!$user->hasAnyRole(['system-administrator', 'developer']), function ($query) use ($user) {
+                $query->whereIn('branch_id', $user->branches->pluck('id'));
             })
-            ->orderBy('updated_at', 'desc')
             ->paginate();
 
         return view('livewire.transaction.index', [

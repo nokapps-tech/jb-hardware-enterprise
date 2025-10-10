@@ -36,12 +36,38 @@
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $transaction->transaction_number ?? 'None' }}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Product Id</flux:text></dt>
-                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $transaction->product_id ?? 'None' }}</flux:text></dd>
+                                            <dt class="text-sm font-medium leading-6">
+                                                <flux:text variant="strong">Branch</flux:text>
+                                            </dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
+                                                @if($transaction->branch)
+                                                    <a href="{{ route('branches.show', $transaction->branch->id) }}" 
+                                                    class="text-blue-600 hover:underline">
+                                                        {{ $transaction->branch->name }}
+                                                    </a>
+                                                @else
+                                                    <flux:text>{{ $transaction->branch?->name ?? 'None' }}</flux:text>
+                                                @endif
+                                            </dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6">
-                                                <flux:text variant="strong">Product Name</flux:text>
+                                                <flux:text variant="strong">Supplier</flux:text>
+                                            </dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
+                                                @if($transaction->supplier)
+                                                    <a href="{{ route('suppliers.show', $transaction->supplier->id) }}" 
+                                                    class="text-blue-600 hover:underline">
+                                                        {{ $transaction->supplier->contact_person }}
+                                                    </a>
+                                                @else
+                                                    <flux:text>{{ $transaction->supplier?->contact_person ?? 'None' }}</flux:text>
+                                                @endif
+                                            </dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6">
+                                                <flux:text variant="strong">Product</flux:text>
                                             </dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
                                                 @if($transaction->product)
@@ -78,7 +104,7 @@
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Status</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $transaction->status ?? 'None' }}</flux:text></dd>
                                         </div>
-                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Created By</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
                                                 @if($transaction->user)
@@ -91,6 +117,7 @@
                                                 @endif
                                             </dd>
                                         </div>
+
                             </dl>
                         </div>
                     </div>

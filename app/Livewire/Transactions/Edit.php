@@ -4,7 +4,9 @@ namespace App\Livewire\Transactions;
 
 use App\Livewire\Forms\TransactionForm;
 use App\Models\Transaction;
+use App\Models\Branch;
 use App\Models\Product;
+use App\Models\Supplier;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +43,7 @@ class Edit extends Component
             }
 
             $transaction->update([
-                'transaction_number' => $this->form->transaction_number,
+                'supplier_id'        => $this->form->supplier_id,
                 'product_id'         => $this->form->product_id,
                 'type'               => $this->form->type,
                 'quantity'           => $this->form->quantity,
@@ -71,7 +73,24 @@ class Edit extends Component
 
     public function render()
     {
+        $user = Auth::user();
+        
+        if ($user->hasAnyRole(['system-administrator', 'developer'])) {
+            $branches = Branch::orderBy('name')->get();
+            if (!$this->form->branch_id) {
+                $this->form->branch_id = null;
+            }
+        } else {
+            $branches = $user->branches()->orderBy('name')->get();
+
+            if ($branches->count() === 1 && !$this->form->branch_id) {
+                $this->form->branch_id = $branches->first()->id;
+            }
+        }
+
         return view('livewire.transaction.edit', [
+            'branches' => $branches,
+            'suppliers' => Supplier::orderBy('contact_person')->get(),
             'products' => Product::orderBy('name')->get(),
             'transaction' => $this->form->transactionModel,
         ]);

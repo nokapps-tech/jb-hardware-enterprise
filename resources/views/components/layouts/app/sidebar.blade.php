@@ -16,13 +16,24 @@
                     <flux:navlist.item icon="chart-bar-square" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
 
-                @canany(['admin.product-categories.index', 'admin.products.index'])
+                @canany(['admin.branches.index','admin.product-categories.index', 'admin.products.index'])
                 <flux:navlist.group :heading="__('Inventory Core')" class="grid mb-4 font-medium">
+                    @can('admin.branches.index')
+                        <flux:navlist.item icon="building" :href="route('branches.index')" :current="request()->routeIs('branches.*')" wire:navigate>{{ __('Branches') }}</flux:navlist.item>
+                    @endcan    
                     @can('admin.product-categories.index')
                         <flux:navlist.item icon="blocks" :href="route('product-categories.index')" :current="request()->routeIs('product-categories.*')" wire:navigate>{{ __('Product Categories') }}</flux:navlist.item>
                     @endcan
                     @can('admin.products.index')
                         <flux:navlist.item icon="boxes" :href="route('products.index')" :current="request()->routeIs('products.*')" wire:navigate>{{ __('Products') }}</flux:navlist.item>
+                    @endcan
+                </flux:navlist.group>
+                @endcanany
+
+                @canany(['admin.transactions.index'])
+                <flux:navlist.group :heading="__('Storage')" class="grid mb-4 font-medium">
+                    @can('admin.transactions.index')
+                        <flux:navlist.item icon="arrow-right-left" :href="route('transactions.index')" :current="request()->routeIs('transactions.*')" wire:navigate>{{ __('Transactions') }}</flux:navlist.item>
                     @endcan
                 </flux:navlist.group>
                 @endcanany

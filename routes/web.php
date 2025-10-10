@@ -88,6 +88,19 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/storage2-transactions/{storage2Transaction}/edit', \App\Livewire\Storage2Transactions\Edit::class)->name('storage2-transactions.edit');
     });
 
+    Route::middleware('can:admin.branches.index')->group(function () {
+        Route::get('/branches', \App\Livewire\Branches\Index::class)->name('branches.index');
+        Route::get('/branches/create', \App\Livewire\Branches\Create::class)->name('branches.create');
+        Route::get('/branches/{branch}', \App\Livewire\Branches\Show::class)->name('branches.show');
+        Route::get('/branches/{branch}/edit', \App\Livewire\Branches\Edit::class)->name('branches.edit');
+    });
+
+    Route::middleware('can:admin.transactions.index')->group(function () {
+        Route::get('/transactions', \App\Livewire\Transactions\Index::class)->name('transactions.index');
+        Route::get('/transactions/create', \App\Livewire\Transactions\Create::class)->name('transactions.create');
+        Route::get('/transactions/{transaction}', \App\Livewire\Transactions\Show::class)->name('transactions.show');
+        Route::get('/transactions/{transaction}/edit', \App\Livewire\Transactions\Edit::class)->name('transactions.edit');
+    });
 
 });
 

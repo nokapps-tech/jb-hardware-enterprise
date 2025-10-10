@@ -4,6 +4,7 @@ namespace App\Livewire\Users;
 
 use App\Livewire\Forms\UserForm;
 use App\Models\User;
+use App\Models\Branch;
 use Livewire\Component;
 
 class Create extends Component
@@ -24,6 +25,8 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.user.create');
+        return view('livewire.user.create', [
+            'branches' => Branch::orderBy('name')->get(),
+        ]);
     }
 }

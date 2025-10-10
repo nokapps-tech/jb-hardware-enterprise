@@ -12,6 +12,8 @@ use OwenIt\Auditing\Contracts\Auditable;
  *
  * @property $id
  * @property $transaction_number
+ * @property $branch_id
+ * @property $supplier_id
  * @property $product_id
  * @property $type
  * @property $quantity
@@ -24,15 +26,16 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property $updated_at
  * @property $deleted_at
  *
+ * @property Branch $branch
  * @property User $user
  * @property Product $product
+ * @property Supplier $supplier
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Transaction extends Model implements Auditable
 {
-    use SoftDeletes;
-    use AuditableTrait;
+    use SoftDeletes, AuditableTrait;
 
     protected $perPage = 20;
 
@@ -41,7 +44,7 @@ class Transaction extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['transaction_number', 'product_id', 'type', 'quantity', 'description', 'notes', 'order_date', 'status', 'created_by'];
+    protected $fillable = ['transaction_number', 'branch_id', 'supplier_id', 'product_id', 'type', 'quantity', 'description', 'notes', 'order_date', 'status', 'created_by'];
 
     public const TYPES = [
         'In',
@@ -54,6 +57,15 @@ class Transaction extends Model implements Auditable
         'Cancelled',
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function branch()
+    {
+        return $this->belongsTo(\App\Models\Branch::class, 'branch_id', 'id');
+    }
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -68,6 +80,14 @@ class Transaction extends Model implements Auditable
     public function product()
     {
         return $this->belongsTo(\App\Models\Product::class, 'product_id', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function supplier()
+    {
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id', 'id');
     }
     
 }

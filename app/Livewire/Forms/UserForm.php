@@ -14,6 +14,7 @@ class UserForm extends Form
     public $name = '';
     public $email = '';
     public $role = '';
+    public $branch_ids = [];
 
     public function rules(): array
     {
@@ -21,6 +22,8 @@ class UserForm extends Form
 			'name' => 'required|string',
 			'email' => 'required|string',
             'role' => 'nullable|string|exists:roles,name',
+            'branch_ids' => 'nullable|array',
+            'branch_ids.*' => 'exists:branches,id',
         ];
     }
 
@@ -31,6 +34,8 @@ class UserForm extends Form
         $this->name = $this->userModel->name;
         $this->email = $this->userModel->email;
         $this->role = $this->userModel->roles()->first()?->name ?? '';
+
+        $this->branch_ids = $this->userModel->branches()->pluck('branches.id')->toArray();
     }
 
     public function store(): void
@@ -46,10 +51,14 @@ class UserForm extends Form
         ]);
 
         if (!empty($validated['role'])) {
-        $user->assignRole($validated['role']);
+            $user->assignRole($validated['role']);
         } 
         else {
             $user->assignRole('user');
+        }
+
+        if (!empty($this->branch_ids)) {
+            $user->branches()->sync($this->branch_ids);
         }
 
         $this->reset();
@@ -68,6 +77,8 @@ class UserForm extends Form
         if (!empty($validated['role'])) {
             $this->userModel->syncRoles([$validated['role']]);
         }
+
+        $this->userModel->branches()->sync($this->branch_ids);
 
         $this->reset();
     }

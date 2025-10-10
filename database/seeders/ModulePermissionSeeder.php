@@ -37,6 +37,8 @@ class ModulePermissionSeeder extends Seeder
             'product-categories' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'products' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'suppliers' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
+            'branches' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
+            'transactions' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'storage1-transactions' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'storage2-transactions' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],
             'contacts' => ['index', 'create', 'show', 'edit', 'delete', 'import', 'export'],

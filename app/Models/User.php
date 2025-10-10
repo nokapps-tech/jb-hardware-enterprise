@@ -15,6 +15,7 @@ use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 
+
 class User extends Authenticatable implements Auditable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -96,5 +97,10 @@ class User extends Authenticatable implements Auditable
         return Attribute::make(
             get: fn () => $this->created_at->setTimezone('Asia/Manila')->format('M d Y, H:i:s')
         );
+    }
+
+    public function branches()
+    {
+        return $this->belongsToMany(\App\Models\Branch::class);
     }
 }

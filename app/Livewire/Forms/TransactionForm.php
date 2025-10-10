@@ -10,6 +10,8 @@ class TransactionForm extends Form
     public ?Transaction $transactionModel;
     
     public $transaction_number = '';
+    public $branch_id = '';
+    public $supplier_id = '';
     public $product_id = '';
     public $type = '';
     public $quantity = '';
@@ -22,7 +24,9 @@ class TransactionForm extends Form
     public function rules(): array
     {
         return [
-			'transaction_number' => 'required|string',
+			'transaction_number' => 'nullable',
+            'branch_id' => 'required|exists:branches,id',
+            'supplier_id' => 'required|exists:suppliers,id',
             'product_id' => 'required|exists:products,id',
 			'type' => 'required|string',
 			'quantity' => 'required',
@@ -39,6 +43,8 @@ class TransactionForm extends Form
         $this->transactionModel = $transactionModel;
         
         $this->transaction_number = $this->transactionModel->transaction_number;
+        $this->branch_id = $this->transactionModel->branch_id;
+        $this->supplier_id = $this->transactionModel->supplier_id;
         $this->product_id = $this->transactionModel->product_id;
         $this->type = $this->transactionModel->type;
         $this->quantity = $this->transactionModel->quantity;

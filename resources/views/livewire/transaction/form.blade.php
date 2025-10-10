@@ -1,7 +1,25 @@
 <div class="space-y-6">
-    
+    <flux:select 
+        wire:model="form.branch_id"
+        :label="__('Branch')"
+        :disabled="($branches->count() === 1)"
+    >
+        <option value="">{{ __('-- Select Branch --') }}</option>
+        @foreach($branches as $branch)
+            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+        @endforeach
+    </flux:select>
+
     <div>
-        <flux:input wire:model="form.transaction_number" :label="__('Transaction Number')" type="text" autocomplete="form.transaction_number"/>
+        <flux:select 
+            wire:model="form.supplier_id" 
+            :label="__('Supplier')"
+        >
+            <option value="">{{ __('-- Select Supplier --') }}</option>
+            @foreach($suppliers as $supplier)
+                <option value="{{ $supplier->id }}">{{ $supplier->contact_person }}</option>
+            @endforeach
+        </flux:select>
     </div>
     <div>
         <flux:select 
