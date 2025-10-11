@@ -163,4 +163,57 @@
     </table>
 </div>
 
+{{-- Transactions --}}
+<div class="p-4 sm:p-8 border border-zinc-200 dark:border-zinc-700 sm:rounded-lg mt-6">
+    <div class="px-4 pb-6 sm:px-0">
+        <flux:heading size="lg" level="2">Transactions</flux:heading>
+    </div>
+    <table class="min-w-full divide-y divide-zinc-200 dark:divide-zinc-700">
+        <thead class="bg-zinc-50 dark:bg-zinc-800">
+            <tr>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Transaction Number</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Branch</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Date</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Product</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Type</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Quantity</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($transactions as $index => $transaction)
+                <tr>
+                    <td class="px-4 py-2">{{ $index + 1 }}</td>
+                    <td class="px-4 py-2">
+                        @if($transaction->branch)
+                            <a href="{{ route('branches.show', $transaction->branch->id) }}" class="text-blue-600 hover:underline">
+                                {{ $transaction->branch->name }}
+                            </a>
+                        @else
+                            <span class="text-gray-400">—</span>
+                        @endif
+                    </td>
+                    <td class="px-4 py-2">{{ $transaction->created_at->format('M d, Y') }}</td>
+                    <td class="px-4 py-2">
+                        @if($transaction->product)
+                            <a href="{{ route('products.show', $transaction->product->id) }}" class="text-blue-600 hover:underline">
+                                {{ $transaction->product->name }}
+                            </a>
+                        @else
+                            <span class="text-gray-400">—</span>
+                        @endif
+                    </td>
+                    <td class="px-4 py-2">{{ $transaction->type ?? '-' }}</td>
+                    <td class="px-4 py-2">{{ $transaction->quantity ?? '-' }}</td>
+                    <td class="px-4 py-2">{{ $transaction->status ?? '-' }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" class="px-4 py-4 text-center text-sm text-zinc-500">No transactions found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
 </section>
