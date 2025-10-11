@@ -7,39 +7,92 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Models\Transaction;
+use App\Models\Branch;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Summary extends Component
 {
     public $totals = [];
+    public $branches = [];
+    public $recentTransactions = [];
 
     public function mount()
     {
+        $user = Auth::user();
+
+        // Summary cards
         $this->totals = [
             [
-                'title' => 'Products',
-                'count' => Product::count(),
-                'icon'  => 'boxes',
-                'route' => route('products.index'),
+                'title'=>'Products',
+                'count'=>Product::count(),
+                'icon'=>'boxes',
+                'route'=>route('products.index'),
+                'bgColor'=>'bg-blue-50 dark:bg-blue-900',
+                'textColor'=>'text-blue-500',
             ],
             [
-                'title' => 'Suppliers',
-                'count' => Supplier::count(),
-                'icon'  => 'truck',
-                'route' => route('suppliers.index'),
+                'title'=>'Suppliers',
+                'count'=>Supplier::count(),
+                'icon'=>'truck',
+                'route'=>route('suppliers.index'),
+                'bgColor'=>'bg-green-50 dark:bg-green-900',
+                'textColor'=>'text-green-500',
             ],
             [
-                'title' => 'Users',
-                'count' => User::count(),
-                'icon'  => 'users',
-                'route' => route('users.index'),
+                'title'=>'Users',
+                'count'=>User::count(),
+                'icon'=>'users',
+                'route'=>route('users.index'),
+                'bgColor'=>'bg-purple-50 dark:bg-purple-900',
+                'textColor'=>'text-purple-500',
             ],
             [
-                'title' => 'Transactions',
-                'count' => Transaction::count(),
-                'icon'  => 'arrow-right-left',
-                'route' => route('transactions.index'),
+                'title'=>'Transactions',
+                'count'=>Transaction::count(),
+                'icon'=>'arrow-right-left',
+                'route'=>route('transactions.index'),
+                'bgColor'=>'bg-yellow-50 dark:bg-yellow-900',
+                'textColor'=>'text-yellow-500',
+            ],
+            [
+                'title'=>'Low Stock',
+                'count'=>Product::where('quantity','<',10)->count(),
+                'icon'=>'exclamation-triangle',
+                'route'=>route('products.index',['filter'=>'low-stock']),
+                'bgColor'=>'bg-red-50 dark:bg-red-900',
+                'textColor'=>'text-red-500',
             ],
         ];
+
+        // Get branches user has access to
+        $branches = Branch::query();
+        if(!$user->hasAnyRole(['system-administrator','developer'])){
+            $branches->whereIn('id', $user->branches->pluck('id'));
+        }
+        $branches = $branches->get();
+
+        // Get transactions grouped by branch
+        $this->branches = Transaction::select('branch_id', DB::raw('COUNT(*) as transactions_count'))
+            ->groupBy('branch_id')
+            ->get()
+            ->map(function($t){
+                return (object)[
+                    'id' => $t->branch_id,
+                    'name' => Branch::find($t->branch_id)->name ?? "Branch {$t->branch_id}",
+                    'transactions_count' => $t->transactions_count,
+                    'low_stock_count' => Transaction::where('branch_id', $t->branch_id)
+                        ->whereHas('product', fn($q)=>$q->where('quantity','<',10))
+                        ->count(),
+                ];
+            });
+
+        // Recent transactions
+        $transactionQuery = Transaction::with(['branch','product','supplier','user'])->latest();
+        if(!$user->hasAnyRole(['system-administrator','developer'])){
+            $transactionQuery->whereIn('branch_id', $user->branches->pluck('id'));
+        }
+        $this->recentTransactions = $transactionQuery->take(10)->get();
     }
 
     public function render()
