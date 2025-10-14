@@ -81,9 +81,6 @@ class Summary extends Component
                     'id' => $t->branch_id,
                     'name' => Branch::find($t->branch_id)->name ?? "Branch {$t->branch_id}",
                     'transactions_count' => $t->transactions_count,
-                    'low_stock_count' => Transaction::where('branch_id', $t->branch_id)
-                        ->whereHas('product', fn($q)=>$q->where('quantity','<',10))
-                        ->count(),
                 ];
             });
 

@@ -25,9 +25,7 @@
         @foreach ($branches as $branch)
             <div class="p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700">
                 <flux:heading size="md" class="mb-2">{{ $branch->name }}</flux:heading>
-                <flux:text class="text-gray-500 dark:text-gray-400 mb-1">Transactions: {{ $branch->transactions_count }}</flux:text>
-                <flux:text class="text-gray-500 dark:text-gray-400">Low Stock: {{ $branch->low_stock_count }}</flux:text>
-            </div>
+                <flux:text class="text-gray-500 dark:text-gray-400 mb-1">Transactions: {{ $branch->transactions_count }}</flux:text>            </div>
         @endforeach
     </div>
     @endif
