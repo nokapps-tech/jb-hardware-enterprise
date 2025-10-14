@@ -15,26 +15,62 @@ class Index extends Component
     public string $search = '';
     public ?string $filter = null;
 
-    public function mount()
+    /** @var array<string, string> */
+    public array $filters = [
+        'over-threshold' => 'Over Threshold',
+        'low-stock' => 'Low Stock',
+        'out-of-stock' => 'Out of Stock',
+    ];
+
+    protected $queryString = [
+        'filter' => ['except' => null],
+        'search' => ['except' => ''],
+    ];
+
+    public function setFilter(?string $value)
     {
-        $this->filter = request()->query('filter');
+        $this->filter = $value;
+        $this->resetPage();
+
+        $this->dispatch('close-filter-dropdown');
     }
 
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingFilter()
+    {
+        $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->filter = request()->query('filter', $this->filter);
+    }
 
     public function render(): View
     {
         $products = Product::query()
-            ->when($this->search !== '', function (Builder $query) {
-                $query->where('name', 'like', '%'.$this->search.'%');
+            ->when($this->search, fn (Builder $q) =>
+                $q->where('name', 'like', "%{$this->search}%")
+            )
+            ->when($this->filter, function (Builder $q) {
+                match ($this->filter) {
+                    'over-threshold' => $q->whereColumn('quantity', '>', 'threshold'),
+                    'low-stock'      => $q->whereColumn('quantity', '<', 'threshold')->where('quantity', '>', 0),
+                    'out-of-stock'   => $q->where('quantity', 0),
+                    default           => null,
+                };
             })
-            ->when($this->filter === 'low-stock', function (Builder $query) {
-                $query->whereColumn('quantity', '<', 'threshold');
-            })
-            ->orderBy('updated_at', 'desc')
+            ->latest('updated_at')
             ->paginate();
 
         return view('livewire.product.index', [
             'products' => $products,
+            'filters' => $this->filters,
             'i' => $this->getPage() * $products->perPage(),
         ]);
     }
