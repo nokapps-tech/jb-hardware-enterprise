@@ -12,18 +12,59 @@ class Index extends Component
 {
     use WithPagination;
 
+    public ?string $filter = null;
+
+    /** @var array<string, string> */
+    public array $filters = [];
+    
+    protected $queryString = [
+        'filter' => ['except' => null],
+        'search' => ['except' => ''],
+    ];
+
+    public function setFilter(?string $value)
+    {
+        $this->filter = $value;
+        $this->resetPage();
+
+        $this->dispatch('close-filter-dropdown');
+    }
+
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingFilter()
+    {
+        $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->filter = request()->query('filter', $this->filter);
+    }
+
     public string $search = '';
 
     public function render(): View
     {
-        $suppliers = Supplier::when($this->search !== '', function (Builder $query) {
-                $query->where('name','like', '%'.$this->search.'%');
+        $suppliers = Supplier::query()
+            ->when($this->search, fn (Builder $q) =>
+                $q->where('name', 'like', "%{$this->search}%")
+            )
+            ->when($this->filter, function (Builder $q) {
+                match ($this->filter) {
+                    default => null,
+                };
             })
-            ->orderBy('updated_at', 'desc')
+            ->latest('updated_at', 'desc')
             ->paginate();
 
         return view('livewire.supplier.index', [
             'suppliers' => $suppliers,
+            'filters' => $this->filters,
             'i' => $this->getPage() * $suppliers->perPage(),
         ]);
     }

@@ -1294,16 +1294,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.32.5",
+            "version": "v12.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "77b2740391cd2a825ba59d6fada45e9b8b9bcc5a"
+                "reference": "f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/77b2740391cd2a825ba59d6fada45e9b8b9bcc5a",
-                "reference": "77b2740391cd2a825ba59d6fada45e9b8b9bcc5a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687",
+                "reference": "f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687",
                 "shasum": ""
             },
             "require": {
@@ -1415,7 +1415,7 @@
                 "league/flysystem-sftp-v3": "^3.25.1",
                 "mockery/mockery": "^1.6.10",
                 "opis/json-schema": "^2.4.1",
-                "orchestra/testbench-core": "^10.6.5",
+                "orchestra/testbench-core": "^10.7.0",
                 "pda/pheanstalk": "^5.0.6|^7.0.0",
                 "php-http/discovery": "^1.15",
                 "phpstan/phpstan": "^2.0",
@@ -1509,7 +1509,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-09-30T17:39:22+00:00"
+            "time": "2025-10-14T13:58:31+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1572,16 +1572,16 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "3832547db6e0e2f8bb03d4093857b378c66eceed"
+                "reference": "038ce42edee619599a1debb7e81d7b3759492819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/3832547db6e0e2f8bb03d4093857b378c66eceed",
-                "reference": "3832547db6e0e2f8bb03d4093857b378c66eceed",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/038ce42edee619599a1debb7e81d7b3759492819",
+                "reference": "038ce42edee619599a1debb7e81d7b3759492819",
                 "shasum": ""
             },
             "require": {
@@ -1629,7 +1629,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2025-09-22T17:29:40+00:00"
+            "time": "2025-10-09T13:42:30+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2250,16 +2250,16 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.5.0",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
-                "reference": "7d236c6caa6a8fa8604caa08abf2ae630be12c24"
+                "reference": "3cb2ea40978449da74b3814eeef75f0388124224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/flux/zipball/7d236c6caa6a8fa8604caa08abf2ae630be12c24",
-                "reference": "7d236c6caa6a8fa8604caa08abf2ae630be12c24",
+                "url": "https://api.github.com/repos/livewire/flux/zipball/3cb2ea40978449da74b3814eeef75f0388124224",
+                "reference": "3cb2ea40978449da74b3814eeef75f0388124224",
                 "shasum": ""
             },
             "require": {
@@ -2310,9 +2310,9 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.5.0"
+                "source": "https://github.com/livewire/flux/tree/v2.6.0"
             },
-            "time": "2025-09-29T21:36:00+00:00"
+            "time": "2025-10-13T23:17:18+00:00"
         },
         {
             "name": "livewire/livewire",
@@ -7393,12 +7393,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:nokapps-tech/sprig-code-generator.git",
-                "reference": "19cbbf728d474b083c164fa9a0c2b8b7d6a35a83"
+                "reference": "5b86dbd61ce2859d4bd153288401276aca6e411c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nokapps-tech/sprig-code-generator/zipball/19cbbf728d474b083c164fa9a0c2b8b7d6a35a83",
-                "reference": "19cbbf728d474b083c164fa9a0c2b8b7d6a35a83",
+                "url": "https://api.github.com/repos/nokapps-tech/sprig-code-generator/zipball/5b86dbd61ce2859d4bd153288401276aca6e411c",
+                "reference": "5b86dbd61ce2859d4bd153288401276aca6e411c",
                 "shasum": ""
             },
             "require": {
@@ -7451,7 +7451,7 @@
                 "source": "https://github.com/nokapps-tech/sprig-code-generator/tree/main",
                 "issues": "https://github.com/nokapps-tech/sprig-code-generator/issues"
             },
-            "time": "2025-09-30T17:15:43+00:00"
+            "time": "2025-10-14T15:12:36+00:00"
         },
         {
             "name": "nunomaduro/collision",

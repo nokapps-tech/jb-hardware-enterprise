@@ -65,7 +65,7 @@ class Index extends Component
                     default           => null,
                 };
             })
-            ->latest('updated_at')
+            ->latest('updated_at', 'desc')
             ->paginate();
 
         return view('livewire.product.index', [
