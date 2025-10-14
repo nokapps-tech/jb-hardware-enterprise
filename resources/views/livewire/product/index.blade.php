@@ -39,38 +39,40 @@
                                 </div>
 
                                 <div class="flex gap-2 items-center">
-                                    <div x-data="{ open: false }" class="relative">
-                                        <flux:button variant="ghost" icon="funnel" icon:variant="outline" @click="open = !open">Filters</flux:button>
-                                        <div 
-                                            x-show="open" 
-                                            x-transition.scale.origin.top.right
-                                            x-cloak
-                                            @click.away="open = false"
-                                            @close-filter-dropdown.window="open = false"
-                                            class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-lg z-50"
-                                        >
-                                            <ul class="py-1 text-sm text-zinc-700 dark:text-zinc-300">
-                                                @foreach($filters as $value => $label)
-                                                    <li>
-                                                        <button 
-                                                            wire:click="setFilter('{{ $value }}')" 
-                                                            class="block w-full text-left px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 
-                                                                {{ $filter === $value ? 'bg-zinc-100 dark:bg-zinc-700 font-medium' : '' }}"
-                                                            @click="open = false"
-                                                        >
-                                                            {{ $label }}
-                                                        </button>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
+                                    @if($filters)
+                                        <div x-data="{ open: false }" class="relative">
+                                            <flux:button variant="ghost" icon="funnel" icon:variant="outline" @click="open = !open">Filters</flux:button>
+                                            <div 
+                                                x-show="open" 
+                                                x-transition.scale.origin.top.right
+                                                x-cloak
+                                                @click.away="open = false"
+                                                @close-filter-dropdown.window="open = false"
+                                                class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-lg z-50"
+                                            >
+                                                <ul class="py-1 text-sm text-zinc-700 dark:text-zinc-300">
+                                                    @foreach($filters as $value => $label)
+                                                        <li>
+                                                            <button 
+                                                                wire:click="setFilter('{{ $value }}')" 
+                                                                class="block w-full text-left px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 
+                                                                    {{ $filter === $value ? 'bg-zinc-100 dark:bg-zinc-700 font-medium' : '' }}"
+                                                                @click="open = false"
+                                                            >
+                                                                {{ $label }}
+                                                            </button>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>
+                                    @else
+                                        <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="No Filter yet">Filters</flux:button>
+                                    @endif
+                                    <!-- <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button> -->
                                 </div>
                             </div>
 
-                            <!-- Active filter badge -->
                             @if($filter)
                             <div class="mx-2 mb-4 text-sm text-zinc-600 dark:text-zinc-300">
                                 Filtering by: 
