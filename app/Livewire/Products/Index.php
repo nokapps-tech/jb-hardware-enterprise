@@ -13,11 +13,22 @@ class Index extends Component
     use WithPagination;
 
     public string $search = '';
+    public ?string $filter = null;
+
+    public function mount()
+    {
+        $this->filter = request()->query('filter');
+    }
+
 
     public function render(): View
     {
-        $products = Product::when($this->search !== '', function (Builder $query) {
-                $query->where('name','like', '%'.$this->search.'%');
+        $products = Product::query()
+            ->when($this->search !== '', function (Builder $query) {
+                $query->where('name', 'like', '%'.$this->search.'%');
+            })
+            ->when($this->filter === 'low-stock', function (Builder $query) {
+                $query->whereColumn('quantity', '<', 'threshold');
             })
             ->orderBy('updated_at', 'desc')
             ->paginate();

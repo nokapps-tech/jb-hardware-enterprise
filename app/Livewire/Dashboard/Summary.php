@@ -57,7 +57,7 @@ class Summary extends Component
             ],
             [
                 'title'=>'Low Stock',
-                'count'=>Product::where('quantity','<',10)->count(),
+                'count'=>Product::whereColumn('quantity', '<', 'threshold')->count(),
                 'icon'=>'exclamation-triangle',
                 'route'=>route('products.index',['filter'=>'low-stock']),
                 'bgColor'=>'bg-red-50 dark:bg-red-900',
