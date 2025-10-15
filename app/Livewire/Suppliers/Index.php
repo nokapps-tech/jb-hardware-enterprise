@@ -12,6 +12,7 @@ class Index extends Component
 {
     use WithPagination;
 
+    public string $search = '';
     public ?string $filter = null;
 
     /** @var array<string, string> */
@@ -30,7 +31,6 @@ class Index extends Component
         $this->dispatch('close-filter-dropdown');
     }
 
-
     public function updatingSearch()
     {
         $this->resetPage();
@@ -46,8 +46,6 @@ class Index extends Component
         $this->filter = request()->query('filter', $this->filter);
     }
 
-    public string $search = '';
-
     public function render(): View
     {
         $suppliers = Supplier::query()
@@ -59,7 +57,7 @@ class Index extends Component
                     default => null,
                 };
             })
-            ->latest('updated_at', 'desc')
+            ->latest('updated_at')
             ->paginate();
 
         return view('livewire.supplier.index', [

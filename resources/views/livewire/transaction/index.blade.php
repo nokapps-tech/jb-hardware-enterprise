@@ -37,16 +37,54 @@
                             <div class="w-full max-w-xs">
                                 <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search transactions"/>
                             </div>
-                            <div>
-                                <!-- <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Filters</flux:button>
-                                <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button>     -->
+                            <div class="flex gap-2 items-center">
+                                @if($filters)
+                                    <div x-data="{ open: false }" class="relative">
+                                        <flux:button variant="ghost" icon="funnel" icon:variant="outline" @click="open = !open">Filters</flux:button>
+                                        <div 
+                                            x-show="open" 
+                                            x-transition.scale.origin.top.right
+                                            x-cloak
+                                            @click.away="open = false"
+                                            @close-filter-dropdown.window="open = false"
+                                            class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-lg z-50"
+                                        >
+                                            <ul class="py-1 text-sm text-zinc-700 dark:text-zinc-300">
+                                                @foreach($filters as $value => $label)
+                                                    <li>
+                                                        <button 
+                                                            wire:click="setFilter('{{ $value }}')" 
+                                                            class="block w-full text-left px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 
+                                                                {{ $filter === $value ? 'bg-zinc-100 dark:bg-zinc-700 font-medium' : '' }}"
+                                                            @click="open = false"
+                                                        >
+                                                            {{ $label }}
+                                                        </button>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                    <flux:button variant="ghost" icon="funnel" icon:variant="outline" tooltip="No Filter yet">Filters</flux:button>
+                                @endif
+                                <!-- <flux:button variant="ghost" icon="adjustments-horizontal" icon:variant="outline" tooltip="Feature preview only. This feature is under active development.">Edit columns</flux:button> -->
                             </div>
                         </div>
+                        @if($filter)
+                            <div class="mx-2 mb-4 text-sm text-zinc-600 dark:text-zinc-300">
+                                Filtering by: 
+                                <span class="inline-block ml-2 px-2 py-1 bg-zinc-100 dark:bg-zinc-700 rounded text-xs font-medium">
+                                    {{ str_replace('-', ' ', ucfirst($filter)) }}
+                                </span>
+                                <button wire:click="$set('filter', null)" class="ml-3 text-sm text-blue-500 hover:underline">Clear</button>
+                            </div>
+                        @endif
                         <div class="inline-block min-w-full py-2 align-middle">
                             <table class="w-full divide-y divide-zinc-300 dark:divide-zinc-600">
                                 <thead>
                                 <tr>
-                                    										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Transaction Number</flux:text></th>
+                                    	<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Transaction Number</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Branch</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Supplier</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product</flux:text></th>

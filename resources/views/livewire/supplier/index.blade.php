@@ -35,7 +35,7 @@
                     <div class="overflow-x-auto">
                         <div class="mx-2 mt-2 mb-4 flex flex-col md:flex-row gap-3 justify-between">
                             <div class="w-full max-w-xs">
-                                <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search productCategories"/>
+                                <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search suppliers"/>
                             </div>
                             <div class="flex gap-2 items-center">
                                 @if($filters)
