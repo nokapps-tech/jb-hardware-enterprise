@@ -21,7 +21,7 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping, Shoul
     }
 
     /**
-     * Return the collection of products (with relations eager loaded).
+     * @return \Illuminate\Support\Collection
      */
     public function collection(): Collection
     {

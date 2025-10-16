@@ -37,7 +37,7 @@
                                 <div class="w-full max-w-xs">
                                     <flux:input wire:model.live="search" icon="magnifying-glass" placeholder="Search products"/>
                                 </div>
-
+                                
                                 <div class="flex gap-2 items-center">
                                     @if($filters)
                                         <div x-data="{ open: false }" class="relative">

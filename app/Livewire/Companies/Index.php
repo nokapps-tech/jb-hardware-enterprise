@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Exports\CompaniesExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Index extends Component
 {
@@ -44,6 +47,12 @@ class Index extends Component
     public function mount()
     {
         $this->filter = request()->query('filter', $this->filter);
+    }
+
+    public function export(): BinaryFileResponse
+    {
+        $filename = 'companies_export_' . now()->format('Y-m-d_His') . '.xlsx';
+        return Excel::download(new CompaniesExport($this->search, $this->filter), $filename);
     }
 
     public function render(): View

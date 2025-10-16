@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Exports\SuppliersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Index extends Component
 {
@@ -46,12 +49,19 @@ class Index extends Component
         $this->filter = request()->query('filter', $this->filter);
     }
 
+    public function export(): BinaryFileResponse
+    {
+        $filename = 'suppliers_export_' . now()->format('Y-m-d_His') . '.xlsx';
+        return Excel::download(new SuppliersExport($this->search, $this->filter), $filename);
+    }
+
     public function render(): View
     {
-        $suppliers = Supplier::query()
-            ->when($this->search, fn (Builder $q) =>
-                $q->where('name', 'like', "%{$this->search}%")
-            )
+        $suppliers = Supplier::with('company')
+            ->when($this->search, fn ($q) =>
+                $q->whereHas('company', fn ($q2) => $q2->where('name', 'like', "%{$this->search}%"))
+                ->orWhere('contact_person', 'like', '%' . $this->search . '%')
+                )
             ->when($this->filter, function (Builder $q) {
                 match ($this->filter) {
                     default => null,
