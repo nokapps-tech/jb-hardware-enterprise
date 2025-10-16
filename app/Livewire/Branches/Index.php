@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -48,7 +49,12 @@ class Index extends Component
 
     public function render(): View
     {
+        $user = auth()->user();
+
         $branches = Branch::query()
+            ->when(!$user->hasAnyRole(['system-administrator','developer']), fn($q) => 
+                $q->whereIn('id', $user->branches->pluck('id'))
+            )
             ->when($this->search, fn (Builder $q) =>
                 $q->where('name', 'like', "%{$this->search}%")
                 ->orWhere('address', 'like', '%' . $this->search . '%')

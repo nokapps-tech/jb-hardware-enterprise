@@ -73,13 +73,19 @@ class Summary extends Component
         $branches = $branches->get();
 
         // Get transactions grouped by branch
-        $this->branches = Transaction::select('branch_id', DB::raw('COUNT(*) as transactions_count'))
+        $this->branches = Transaction::query()
+            ->when(
+                !$user->hasAnyRole(['system-administrator', 'developer']),
+                fn($q) => $q->whereIn('branch_id', $user->branches->pluck('id'))
+            )
+            ->select('branch_id', DB::raw('COUNT(*) as transactions_count'))
             ->groupBy('branch_id')
             ->get()
-            ->map(function($t){
+            ->map(function ($t) {
+                $branch = Branch::find($t->branch_id);
                 return (object)[
                     'id' => $t->branch_id,
-                    'name' => Branch::find($t->branch_id)->name ?? "Branch {$t->branch_id}",
+                    'name' => $branch?->name ?? "Branch {$t->branch_id}",
                     'transactions_count' => $t->transactions_count,
                 ];
             });
