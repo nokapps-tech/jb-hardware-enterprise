@@ -6,7 +6,6 @@
             <flux:breadcrumbs.item icon="home" />
             <flux:breadcrumbs.item>Dashboard</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-         @livewire('notification-bell')
     </div>
 
     <flux:separator />
