@@ -54,7 +54,6 @@
                                             @foreach($user->branches as $branch)
                                                 <flux:text>{{ $branch->name }}</flux:text>
                                             @endforeach
-                                            
                                         @else
                                             <flux:text>--</flux:text>
                                         @endif
