@@ -38,22 +38,6 @@
                 </flux:navlist.group>
                 @endcanany
 
-                @canany(['admin.storage1-transactions.index'])
-                <flux:navlist.group :heading="__('Storage A')" class="grid mb-4 font-medium">
-                    @can('admin.storage1-transactions.index')
-                        <flux:navlist.item icon="arrow-right-left" :href="route('storage1-transactions.index')" :current="request()->routeIs('storage1-transactions.*')" wire:navigate>{{ __('Storage A Transactions') }}</flux:navlist.item>
-                    @endcan
-                </flux:navlist.group>
-                @endcanany
-
-                @canany(['admin.storage2-transactions.index'])
-                <flux:navlist.group :heading="__('Storage B')" class="grid mb-4 font-medium">
-                    @can('admin.storage2-transactions.index')
-                        <flux:navlist.item icon="arrow-right-left" :href="route('storage2-transactions.index')" :current="request()->routeIs('storage2-transactions.*')" wire:navigate>{{ __('Storage B Transactions') }}</flux:navlist.item>
-                    @endcan
-                </flux:navlist.group>
-                @endcanany
-
                 @canany(['admin.companies.index', 'admin.suppliers.index'])
                 <flux:navlist.group :heading="__('Contacts')" class="grid mb-4 font-medium">
                     @can('admin.companies.index')
