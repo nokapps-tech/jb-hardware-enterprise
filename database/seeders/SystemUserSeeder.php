@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class SystemUserSeeder extends Seeder
 {
@@ -14,14 +15,16 @@ class SystemUserSeeder extends Seeder
     public function run(): void
     {
         $admin = User::factory()->create([
-            'name' => 'System Administrator',
-            'email' => 'administrator@nokapps.tech',
+            'name' => 'Elizabeth Lui',
+            'email' => 'elizabeth.j&b@gmail.com',
+            'password' => Hash::make('Jbhardware032601'),
             'email_verified_at' => now()
         ]);
 
         $developer = User::factory()->create([
             'name' => 'Developer',
             'email' => 'developer@nokapps.tech',
+            'password' => Hash::make('Nokappsdeveloper0926'),
             'email_verified_at' => now()
         ]);
 
