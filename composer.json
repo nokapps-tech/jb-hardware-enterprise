@@ -14,12 +14,6 @@
         "framework"
     ],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:nokapps-tech/sprig-code-generator.git"
-        }
-    ],
     "require": {
         "php": "^8.2",
         "jenssegers/agent": "^2.6",
