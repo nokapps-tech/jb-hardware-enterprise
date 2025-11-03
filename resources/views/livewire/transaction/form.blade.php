@@ -28,7 +28,7 @@
         >
             <option value="">{{ __('-- Select Product --') }}</option>
             @foreach($products as $product)
-                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->size }}</option>
             @endforeach
         </flux:select>
     </div>

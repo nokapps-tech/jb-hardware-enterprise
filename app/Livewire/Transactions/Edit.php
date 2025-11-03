@@ -43,6 +43,7 @@ class Edit extends Component
             }
 
             $transaction->update([
+                'branch_id'          => $this->form->branch_id,
                 'supplier_id'        => $this->form->supplier_id,
                 'product_id'         => $this->form->product_id,
                 'type'               => $this->form->type,
@@ -77,8 +78,8 @@ class Edit extends Component
         
         if ($user->hasAnyRole(['system-administrator', 'developer'])) {
             $branches = Branch::orderBy('name')->get();
-            if (!$this->form->branch_id) {
-                $this->form->branch_id = null;
+            if ($branches->count() === 1 && !$this->form->branch_id) {
+                $this->form->branch_id = $branches->first()->id;
             }
         } else {
             $branches = $user->branches()->orderBy('name')->get();

@@ -44,6 +44,11 @@ class Branch extends Model implements Auditable
     {
         return $this->hasMany(\App\Models\Transaction::class, 'id', 'branch_id');
     }
+
+    public function products()
+    {
+        return $this->hasMany(\App\Models\Product::class, 'id', 'branch_id');
+    }
     
     public function users()
     {

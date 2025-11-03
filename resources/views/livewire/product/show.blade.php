@@ -44,6 +44,25 @@
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{!! QrCode::size(150)->generate($product->product_code) !!}</flux:text></dd>
                                         </div>
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Branch Id</flux:text></dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->branch_id ?? 'None' }}</flux:text></dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6">
+                                                <flux:text variant="strong">Branch Name</flux:text>
+                                            </dt>
+                                            <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0">
+                                                @if($product->branch)
+                                                    <a href="{{ route('branches.show', $product->branch->id) }}" 
+                                                    class="text-blue-600 hover:underline">
+                                                        {{ $product->branch->name }}
+                                                    </a>
+                                                @else
+                                                    <flux:text>{{ $product->branch?->name ?? 'None' }}</flux:text>
+                                                @endif
+                                            </dd>
+                                        </div>
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6"><flux:text variant="strong">Name</flux:text></dt>
                                             <dd class="mt-1 text-sm leading-6 sm:col-span-3 sm:mt-0"><flux:text>{{ $product->name ?? 'None' }}</flux:text></dd>
                                         </div>

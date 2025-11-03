@@ -16,6 +16,14 @@
 
     <!-- Other Product Fields -->
     <div>
+        <flux:select wire:model="form.branch_id" :label="__('Branch')">
+            <option value="">{{ __('-- Select Branch --') }}</option>
+            @foreach($branches as $branch)
+                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+            @endforeach
+        </flux:select>
+    </div>
+    <div>
         <flux:input wire:model="form.name" :label="__('Name')" type="text" autocomplete="form.name"/>
     </div>
     <div>

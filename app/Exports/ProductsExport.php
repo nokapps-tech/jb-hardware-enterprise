@@ -47,6 +47,7 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping, Shoul
         return [
             'ID',
             'Product Code',
+            'Branch',
             'Name',
             'Category',
             'Notes',
@@ -68,9 +69,10 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping, Shoul
         return [
             $product->id,
             $product->product_code ?? '',
+            $product->branch->name ?? '',
             $product->name ?? '',
             $product->productCategory->name ?? '',
-            $product->description ?? '',
+            $product->notes ?? '',
             $product->price ?? '',
             $product->cost ?? '',
             $product->size ?? '',

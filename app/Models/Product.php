@@ -16,6 +16,7 @@ use App\Models\User;
  *
  * @property $id
  * @property $product_code
+ * @property $branch_id
  * @property $name
  * @property $product_category_id
  * @property $notes
@@ -45,7 +46,7 @@ class Product extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['product_code', 'name', 'product_category_id', 'notes', 'price', 'cost', 'size', 'unit', 'quantity', 'threshold'];
+    protected $fillable = ['product_code', 'branch_id', 'name', 'product_category_id', 'notes', 'price', 'cost', 'size', 'unit', 'quantity', 'threshold'];
 
 
     /**
@@ -54,6 +55,11 @@ class Product extends Model implements Auditable
     public function productCategory()
     {
         return $this->belongsTo(\App\Models\ProductCategory::class, 'product_category_id', 'id');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(\App\Models\Branch::class, 'branch_id', 'id');
     }
 
     protected static function booted()

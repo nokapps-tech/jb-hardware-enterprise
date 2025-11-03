@@ -6,6 +6,7 @@ use App\Livewire\Forms\ProductForm;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\ProductCategory;
+use App\Models\Branch;
 
 
 class Edit extends Component
@@ -28,6 +29,7 @@ class Edit extends Component
     {
         return view('livewire.product.edit', [
             'product_categories' => ProductCategory::orderBy('name')->get(),
+            'branches' => Branch::orderBy('name')->get(),
             'product' => $this->form->productModel,
         ]);
     }

@@ -69,8 +69,8 @@ class Create extends Component
 
         if ($user->hasAnyRole(['system-administrator', 'developer'])) {
             $branches = Branch::orderBy('name')->get();
-            if (!$this->form->branch_id) {
-                $this->form->branch_id = null;
+            if ($branches->count() === 1 && !$this->form->branch_id) {
+                $this->form->branch_id = $branches->first()->id;
             }
         } else {
             $branches = $user->branches()->orderBy('name')->get();

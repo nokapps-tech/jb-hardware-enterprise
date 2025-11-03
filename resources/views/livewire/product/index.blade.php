@@ -108,6 +108,15 @@
                                         class="hover:bg-gray-50 hover:dark:bg-zinc-700 {{ $product->quantity <= $product->threshold ? 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100' : '' }}"
                                     >
                                         	<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->product_code }}</flux:text></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                @if($product->branch)
+                                                    <a href="{{ route('branches.show', $product->branch->id) }}" class="text-blue-600 hover:underline">
+                                                        {{ $product->branch->name }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-gray-400">—</span>
+                                                @endif
+                                            </td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->name }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
                                                 @if($product->productCategory)
@@ -118,7 +127,7 @@
                                                     <span class="text-gray-400">—</span>
                                                 @endif
                                             </td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->description }}</flux:text></td>
+											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->notes }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->price }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->cost }}</flux:text></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->size }}</flux:text></td>

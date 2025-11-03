@@ -6,6 +6,7 @@ use App\Livewire\Forms\ProductForm;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\ProductCategory;
+use App\Models\Branch;
 
 class Create extends Component
 {
@@ -27,6 +28,7 @@ class Create extends Component
     {
         return view('livewire.product.create', [
             'product_categories' => ProductCategory::orderBy('name')->get(),
+            'branches' => Branch::orderBy('name')->get(),
         ]);
     }
 }

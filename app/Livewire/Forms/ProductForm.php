@@ -10,6 +10,7 @@ class ProductForm extends Form
     public ?Product $productModel;
     
     public $product_code = '';
+    public $branch_id = '';
     public $name = '';
     public $product_category_id = '';
     public $notes = '';
@@ -24,6 +25,7 @@ class ProductForm extends Form
     {
         return [
             'product_code' => 'nullable|string',
+            'branch_id' => 'required|exists:branches,id',
             'name' => 'required|string',
             'product_category_id' => 'required|exists:product_categories,id',
             'notes' => 'nullable|string',
@@ -41,6 +43,7 @@ class ProductForm extends Form
         $this->productModel = $productModel;
         
         $this->product_code = $this->productModel->product_code;
+        $this->branch_id = $this->productModel->branch_id;
         $this->name = $this->productModel->name;
         $this->product_category_id = $this->productModel->product_category_id;
         $this->notes = $this->productModel->notes;
@@ -62,7 +65,6 @@ class ProductForm extends Form
     public function update(): void
     {
         $this->productModel->update($this->validate());
-        $this->dispatch('toast', message: 'Product updated successfully!');
         $this->reset();
     }
 }
