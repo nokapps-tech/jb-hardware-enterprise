@@ -63,9 +63,21 @@ class Index extends Component
     public function render(): View
     {
         $products = Product::query()
-            ->when($this->search, fn (Builder $q) =>
-                $q->where('name', 'like', "%{$this->search}%")
-            )
+            ->when($this->search, function (Builder $q) {
+                $search = $this->search;
+                $q->where(function (Builder $q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('product_code', 'like', "%{$search}%")
+                    ->orWhere('brand', 'like', "%{$search}%")
+                    ->orWhere('size', 'like', "%{$search}%")
+                    ->orWhereHas('productCategory', function (Builder $q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('branch', function (Builder $q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
+                });
+            })
             ->when($this->filter, function (Builder $q) {
                 match ($this->filter) {
                     'over-threshold' => $q->whereColumn('quantity', '>', 'threshold'),
@@ -83,6 +95,7 @@ class Index extends Component
             'i' => $this->getPage() * $products->perPage(),
         ]);
     }
+
 
     public function delete(Product $product)
     {
