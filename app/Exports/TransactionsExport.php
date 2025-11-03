@@ -45,7 +45,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
                             ->orWhere('order_date', 'like', "%{$term}%")
                             ->orWhere('status', 'like', "%{$term}%")
                             ->orWhereHas('branch', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
-                            ->orWhereHas('supplier', fn($q3) => $q3->where('contact_person', 'like', "%{$term}%"))
+                            ->orWhereHas('company', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
                             ->orWhereHas('product', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
                             ->orWhereHas('user', fn($q3) => $q3->where('name', 'like', "%{$term}%"));
                         });
@@ -70,7 +70,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
             'ID',
             'Transaction Number',
             'Branch Name',
-            'Supplier Name',
+            'Company Name',
             'Product Name',
             'Type',
             'Quantity',
@@ -92,7 +92,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
             $transaction->id,
             $transaction->transaction_number ?? '',
             $transaction->branch->name ?? '',
-            $transaction->supplier->contact_person ?? '',
+            $transaction->company->name ?? '',
             $transaction->product->name ?? '',
             $transaction->type ?? '',
             $transaction->quantity ?? '',

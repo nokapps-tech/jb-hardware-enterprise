@@ -12,12 +12,12 @@
 
     <div>
         <flux:select 
-            wire:model="form.supplier_id" 
-            :label="__('Supplier')"
+            wire:model="form.company_id" 
+            :label="__('Company')"
         >
-            <option value="">{{ __('-- Select Supplier --') }}</option>
-            @foreach($suppliers as $supplier)
-                <option value="{{ $supplier->id }}">{{ $supplier->contact_person }}</option>
+            <option value="">{{ __('-- Select Company --') }}</option>
+            @foreach($companies as $company)
+                <option value="{{ $company->id }}">{{ $company->name }}</option>
             @endforeach
         </flux:select>
     </div>
@@ -28,7 +28,7 @@
         >
             <option value="">{{ __('-- Select Product --') }}</option>
             @foreach($products as $product)
-                <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->size }}</option>
+                <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->size }} - {{ $product->brand }}</option>
             @endforeach
         </flux:select>
     </div>

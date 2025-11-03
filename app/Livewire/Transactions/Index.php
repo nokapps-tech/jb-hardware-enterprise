@@ -76,7 +76,7 @@ class Index extends Component
                             ->orWhere('order_date', 'like', "%{$term}%")
                             ->orWhere('status', 'like', "%{$term}%")
                             ->orWhereHas('branch', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
-                            ->orWhereHas('supplier', fn($q3) => $q3->where('contact_person', 'like', "%{$term}%"))
+                            ->orWhereHas('company', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
                             ->orWhereHas('product', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
                             ->orWhereHas('user', fn($q3) => $q3->where('name', 'like', "%{$term}%"));
                         });

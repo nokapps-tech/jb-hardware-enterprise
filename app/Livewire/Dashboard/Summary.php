@@ -91,7 +91,7 @@ class Summary extends Component
             });
 
         // Recent transactions
-        $transactionQuery = Transaction::with(['branch','product','supplier','user'])->latest();
+        $transactionQuery = Transaction::with(['branch','product','company','user'])->latest();
         if(!$user->hasAnyRole(['system-administrator','developer'])){
             $transactionQuery->whereIn('branch_id', $user->branches->pluck('id'));
         }

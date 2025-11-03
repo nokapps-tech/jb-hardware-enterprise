@@ -48,7 +48,7 @@
                 <tr class="border-b border-zinc-200 dark:border-zinc-700">
                     <td class="px-4 py-2">{{ $t->created_at->format('M d, Y H:i') }}</td>
                     <td class="px-4 py-2">{{ $t->branch->name ?? '-' }}</td>
-                    <td class="px-4 py-2">{{ $t->product->name ?? $t->supplier->name }}</td>
+                    <td class="px-4 py-2">{{ $t->product->name ?? $t->supplier->name }} - {{ $t->product->size ?? $t->supplier->size }} - {{ $t->product->brand ?? $t->supplier->brand }}</td>
                     <td class="px-4 py-2">{{ ucfirst($t->type) }}</td>
                     <td class="px-4 py-2">{{ $t->quantity }}</td>
                     <td class="px-4 py-2">{{ $t->user->name ?? '-' }}</td>

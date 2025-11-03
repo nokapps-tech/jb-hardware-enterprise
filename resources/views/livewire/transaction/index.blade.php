@@ -85,8 +85,7 @@
                                 <thead>
                                 <tr>
                                     	<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Transaction Number</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Branch</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Supplier</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Company</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Type</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Quantity</flux:text></th>
@@ -104,18 +103,9 @@
                                     <tr class="hover:bg-gray-50 hover:dark:bg-zinc-700" wire:key="{{ $transaction->id }}">
                                         											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->transaction_number }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                @if($transaction->branch)
-                                                    <a href="{{ route('branches.show', $transaction->branch->id) }}" class="text-blue-600 hover:underline">
-                                                        {{ $transaction->branch->name }}
-                                                    </a>
-                                                @else
-                                                    <span class="text-gray-400">—</span>
-                                                @endif
-                                            </td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                @if($transaction->supplier)
-                                                    <a href="{{ route('suppliers.show', $transaction->supplier->id) }}" class="text-blue-600 hover:underline">
-                                                        {{ $transaction->supplier->contact_person }}
+                                                @if($transaction->company)
+                                                    <a href="{{ route('companies.show', $transaction->company->id) }}" class="text-blue-600 hover:underline">
+                                                        {{ $transaction->company->name }}
                                                     </a>
                                                 @else
                                                     <span class="text-gray-400">—</span>
@@ -124,7 +114,7 @@
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
                                                 @if($transaction->product)
                                                     <a href="{{ route('products.show', $transaction->product->id) }}" class="text-blue-600 hover:underline">
-                                                        {{ $transaction->product->name }}
+                                                        {{ $transaction->product->name }} - {{ $transaction->product->size }} - {{ $transaction->product->brand }}
                                                     </a>
                                                 @else
                                                     <span class="text-gray-400">—</span>
