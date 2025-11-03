@@ -95,6 +95,7 @@
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Price</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Cost</flux:text></th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Size</flux:text></th>
+                                        <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Brand</flux:text></th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Unit</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Quantity</flux:text></th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Threshold</flux:text></th>
@@ -132,6 +133,7 @@
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->price }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->cost }}</flux:text></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->size }}</flux:text></td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->brand }}</flux:text></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->unit }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->quantity }}</flux:text></td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $product->threshold }}</flux:text></td>

@@ -23,6 +23,7 @@ use App\Models\User;
  * @property $price
  * @property $cost
  * @property $size
+ * @property $brand
  * @property $unit
  * @property $quantity
  * @property $threshold
@@ -46,7 +47,7 @@ class Product extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['product_code', 'branch_id', 'name', 'product_category_id', 'notes', 'price', 'cost', 'size', 'unit', 'quantity', 'threshold'];
+    protected $fillable = ['product_code', 'branch_id', 'name', 'product_category_id', 'notes', 'price', 'cost', 'size', 'brand', 'unit', 'quantity', 'threshold'];
 
 
     /**

@@ -17,6 +17,7 @@ class ProductForm extends Form
     public $price = '';
     public $cost = '';
     public $size = '';
+    public $brand = '';
     public $unit = '';
     public $quantity = '';
     public $threshold = '';
@@ -32,6 +33,7 @@ class ProductForm extends Form
             'price' => 'nullable|numeric|min:0',
             'cost' => 'nullable|numeric|min:0',
             'size' => 'nullable|string',
+            'brand' => 'nullable|string',
             'unit' => 'nullable|string',
             'quantity' => 'required|integer|min:0',
             'threshold' => 'nullable|integer|min:0',
@@ -49,6 +51,7 @@ class ProductForm extends Form
         $this->notes = $this->productModel->notes;
         $this->price = $this->productModel->price;
         $this->cost = $this->productModel->cost;
+        $this->brand = $this->productModel->brand;
         $this->size = $this->productModel->size;
         $this->unit = $this->productModel->unit;
         $this->quantity = $this->productModel->quantity;

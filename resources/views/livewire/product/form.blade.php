@@ -44,6 +44,9 @@
         <flux:input wire:model="form.cost" :label="__('Cost')" type="text" autocomplete="form.cost"/>
     </div>
     <div>
+        <flux:input wire:model="form.brand" :label="__('Brand')" type="text" autocomplete="form.brand"/>
+    </div>
+    <div>
         <flux:input wire:model="form.size" :label="__('Size')" type="text" autocomplete="form.size"/>
     </div>
     <div>
