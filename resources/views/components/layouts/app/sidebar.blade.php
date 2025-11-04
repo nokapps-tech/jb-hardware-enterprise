@@ -38,13 +38,16 @@
                 </flux:navlist.group>
                 @endcanany
 
-                @canany(['admin.companies.index', 'admin.suppliers.index'])
+                @canany(['admin.companies.index', 'admin.suppliers.index', 'admin.clients.index'])
                 <flux:navlist.group :heading="__('Contacts')" class="grid mb-4 font-medium">
                     @can('admin.companies.index')
                         <flux:navlist.item icon="building-2" :href="route('companies.index')" :current="request()->routeIs('companies.*')" wire:navigate>{{ __('Companies') }}</flux:navlist.item>
                     @endcan
                     @can('admin.suppliers.index')
                         <flux:navlist.item icon="truck" :href="route('suppliers.index')" :current="request()->routeIs('suppliers.*')" wire:navigate>{{ __('Suppliers') }}</flux:navlist.item>
+                    @endcan
+                    @can('admin.clients.index')
+                        <flux:navlist.item icon="book-user" :href="route('clients.index')" :current="request()->routeIs('clients.*')" wire:navigate>{{ __('Clients') }}</flux:navlist.item>
                     @endcan
                 </flux:navlist.group>
                 @endcanany

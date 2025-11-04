@@ -81,6 +81,13 @@ Route::middleware(['auth', 'verified', 'can:admin'])->group(function () {
         Route::get('/branches/{branch}/edit', \App\Livewire\Branches\Edit::class)->name('branches.edit');
     });
 
+    Route::middleware('can:admin.clients.index')->group(function () {
+        Route::get('/clients', \App\Livewire\Clients\Index::class)->name('clients.index');
+        Route::get('/clients/create', \App\Livewire\Clients\Create::class)->name('clients.create');
+        Route::get('/clients/{client}', \App\Livewire\Clients\Show::class)->name('clients.show');
+        Route::get('/clients/{client}/edit', \App\Livewire\Clients\Edit::class)->name('clients.edit');
+    });
+
 });
 
 require __DIR__.'/auth.php';
