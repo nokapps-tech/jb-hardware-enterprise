@@ -28,7 +28,7 @@
     </div>
     <div>
         <flux:select wire:model="form.product_category_id" :label="__('Product')">
-            <option value="">{{ __('-- Select Product --') }}</option>
+            <option value="">{{ __('-- Select Product Category --') }}</option>
             @foreach($product_categories as $product_category)
                 <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
             @endforeach
