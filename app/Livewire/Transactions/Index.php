@@ -69,15 +69,13 @@ class Index extends Component
                     foreach ($searchTerms as $term) {
                         $query->where(function ($q2) use ($term) {
                             $q2->where('id', 'like', "%{$term}%")
-                            ->orWhere('type', 'like', "%{$term}%")
-                            ->orWhere('quantity', 'like', "%{$term}%")
                             ->orWhere('description', 'like', "%{$term}%")
                             ->orWhere('notes', 'like', "%{$term}%")
                             ->orWhere('order_date', 'like', "%{$term}%")
                             ->orWhere('status', 'like', "%{$term}%")
                             ->orWhereHas('branch', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
                             ->orWhereHas('company', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
-                            ->orWhereHas('product', function ($q3) use ($term) {
+                            ->orWhereHas('items.product', function ($q3) use ($term) {
                                 $q3->whereRaw("CONCAT(name, ' - ', size, ' - ', brand) LIKE ?", ["%{$term}%"]);
                             })
                             ->orWhereHas('user', fn($q3) => $q3->where('name', 'like', "%{$term}%"));
@@ -102,6 +100,20 @@ class Index extends Component
 
     public function delete(Transaction $transaction)
     {
+        // Only revert stock if the transaction is completed
+        if ($transaction->status === 'Completed') {
+            foreach ($transaction->items as $item) {
+                $product = $item->product;
+
+                if ($item->type === 'In') {
+                    // Revert an incoming transaction
+                    $product->decrement('quantity', $item->quantity);
+                } elseif ($item->type === 'Out') {
+                    // Revert an outgoing transaction
+                    $product->increment('quantity', $item->quantity);
+                }
+            }
+        }
         $transaction->delete();
 
         return $this->redirectRoute('transactions.index', navigate: true);

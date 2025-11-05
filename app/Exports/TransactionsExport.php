@@ -29,7 +29,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
     {
         $user = Auth::user();
         $searchTerms = explode(' ', $this->search);
-        return Transaction::query()
+        $transactions = Transaction::query()
             ->when(!$user->hasAnyRole(['system-administrator', 'developer']), function ($query) use ($user) {
                 $query->whereIn('branch_id', $user->branches->pluck('id'));
             })
@@ -38,15 +38,15 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
                     foreach ($searchTerms as $term) {
                         $query->where(function ($q2) use ($term) {
                             $q2->where('id', 'like', "%{$term}%")
-                            ->orWhere('type', 'like', "%{$term}%")
-                            ->orWhere('quantity', 'like', "%{$term}%")
                             ->orWhere('description', 'like', "%{$term}%")
                             ->orWhere('notes', 'like', "%{$term}%")
                             ->orWhere('order_date', 'like', "%{$term}%")
                             ->orWhere('status', 'like', "%{$term}%")
                             ->orWhereHas('branch', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
                             ->orWhereHas('company', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
-                            ->orWhereHas('product', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
+                            ->orWhereHas('items.product', function ($q3) use ($term) {
+                                $q3->whereRaw("CONCAT(name, ' - ', size, ' - ', brand) LIKE ?", ["%{$term}%"]);
+                            })
                             ->orWhereHas('user', fn($q3) => $q3->where('name', 'like', "%{$term}%"));
                         });
                     }
@@ -59,6 +59,18 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
             })
             ->latest('updated_at')
             ->get();
+
+        $rows = collect();
+        foreach ($transactions as $transaction) {
+            foreach ($transaction->items as $item) {
+                $rows->push([
+                    'transaction' => $transaction,
+                    'item' => $item,
+                ]);
+            }
+        }
+
+        return $rows;
     }
 
     /**
@@ -67,12 +79,14 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
     public function headings(): array
     {
         return [
-            'ID',
+            'Transaction ID',
             'Transaction Number',
             'Branch Name',
             'Company Name',
             'Product Name',
-            'Type',
+            'Product Size',
+            'Product Brand',
+            'Type',          // In / Out
             'Quantity',
             'Description',
             'Notes',
@@ -83,25 +97,33 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping, S
         ];
     }
 
+
     /**
      * Map a Transaction model to an array that matches the headings order.
      */
-    public function map($transaction): array
+    public function map($row): array
     {
+        $transaction = $row['transaction'];
+        $item = $row['item'];
+        $product = $item->product;
+
         return [
             $transaction->id,
             $transaction->transaction_number ?? '',
-            $transaction->branch->name ?? '',
-            $transaction->company->name ?? '',
-            $transaction->product->name ?? '',
-            $transaction->type ?? '',
-            $transaction->quantity ?? '',
+            $transaction->branch?->name ?? '',
+            $transaction->company?->name ?? '',
+            $product?->name ?? '',
+            $product?->size ?? '',
+            $product?->brand ?? '',
+            $item->type ?? '',
+            $item->quantity ?? '',
             $transaction->description ?? '',
             $transaction->notes ?? '',
             $transaction->order_date ?? '',
             $transaction->status ?? '',
-            $transaction->user->name ?? '',
+            $transaction->user?->name ?? '',
             optional($transaction->created_at)->format('Y-m-d H:i:s'),
         ];
     }
+
 }

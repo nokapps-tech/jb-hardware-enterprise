@@ -21,30 +21,45 @@
             @endforeach
         </flux:select>
     </div>
-    <div>
-        <flux:select 
-            wire:model="form.product_id" 
-            :label="__('Product')"
-        >
-            <option value="">{{ __('-- Select Product --') }}</option>
-            @foreach($products as $product)
-                <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->size }} - {{ $product->brand }}</option>
-            @endforeach
-        </flux:select>
-    </div>
-    <div>
-        <flux:select 
-            wire:model="form.type" 
-            :label="__('Type')"
-        >
-            <option value="">{{ __('-- Select Type --') }}</option>
-            @foreach($types as $type)
-                <option value="{{ $type }}">{{ $type }}</option>
-            @endforeach
-        </flux:select>
-    </div>
-    <div>
-        <flux:input wire:model="form.quantity" :label="__('Quantity')" type="text" autocomplete="form.quantity"/>
+    <div class="space-y-4">
+        @foreach ($items as $index => $item)
+        <div class="flex items-end gap-3">
+            <flux:select
+                wire:model="items.{{ $index }}.product_id"
+                :label="__('Product') . ' #' . ($index + 1)"
+                class="flex-1"
+            >
+                <option value="">{{ __('-- Select Product --') }}</option>
+                @foreach ($products as $product)
+                    <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->size }} - {{ $product->brand }}</option>
+                @endforeach
+            </flux:select>
+
+            <flux:input
+                wire:model="items.{{ $index }}.quantity"
+                :label="__('Qty')"
+                type="text"
+                class="w-28"
+            />
+
+            <flux:select
+                wire:model="items.{{ $index }}.type"
+                :label="__('Type')"
+                class="w-36"
+            >
+                <option value="">{{ __('-- Select Type --') }}</option>
+                @foreach ($types as $type)
+                    <option value="{{ $type }}">{{ $type }}</option>
+                @endforeach
+            </flux:select>
+
+            @if ($loop->last)
+                <flux:button wire:click="addItem" icon="plus" variant="primary" />
+            @else
+                <flux:button wire:click="removeItem({{ $index }})" icon="minus" variant="danger"/>
+            @endif
+        </div>
+    @endforeach
     </div>
     <div>
         <flux:input wire:model="form.description" :label="__('Description')" type="text" autocomplete="form.description"/>

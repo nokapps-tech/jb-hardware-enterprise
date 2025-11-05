@@ -15,6 +15,8 @@ class Edit extends Component
 {
     public TransactionForm $form;
 
+    public array $items = [];
+
     public array $types = [];
     public array $statuses = [];
 
@@ -24,6 +26,33 @@ class Edit extends Component
 
         $this->types = Transaction::TYPES;
         $this->statuses = Transaction::STATUSES;
+    
+         // Populate items from transaction details if available
+        $this->items = $transaction->items->map(function($item) {
+            return [
+                'product_id' => $item->product_id,
+                'quantity'   => $item->quantity,
+                'type'       => $item->type,
+            ];
+        })->toArray();
+
+        // Fallback if no items exist
+        if (empty($this->items)) {
+            $this->items = [
+                ['product_id' => '', 'quantity' => '', 'type' => '']
+            ];
+        }
+    }
+
+    public function addItem()
+    {
+        $this->items[] = ['product_id' => '', 'quantity' => '', 'type' => ''];
+    }
+
+    public function removeItem($index)
+    {
+        unset($this->items[$index]);
+        $this->items = array_values($this->items);
     }
 
     public function save()
@@ -33,39 +62,53 @@ class Edit extends Component
         try {
             $transaction = $this->form->transactionModel;
 
+            // Revert old stock if transaction already completed
             if ($transaction->status === 'Completed') {
-                $product = $transaction->product;
-                if ($transaction->type === 'In') {
-                    $product->decrement('quantity', $transaction->quantity);
-                } elseif ($transaction->type === 'Out') {
-                    $product->increment('quantity', $transaction->quantity);
+                foreach ($transaction->items as $oldItem) {
+                    $product = $oldItem->product;
+                    if ($oldItem->type === 'In') {
+                        $product->decrement('quantity', $oldItem->quantity);
+                    } elseif ($oldItem->type === 'Out') {
+                        $product->increment('quantity', $oldItem->quantity);
+                    }
                 }
             }
 
+            // Update transaction main fields
             $transaction->update([
-                'branch_id'          => $this->form->branch_id,
-                'company_id'        => $this->form->company_id,
-                'product_id'         => $this->form->product_id,
-                'type'               => $this->form->type,
-                'quantity'           => $this->form->quantity,
-                'description'        => $this->form->description,
-                'notes'              => $this->form->notes,
-                'order_date'         => $this->form->order_date,
-                'status'             => $this->form->status,
+                'branch_id'   => $this->form->branch_id,
+                'company_id'  => $this->form->company_id,
+                'description' => $this->form->description,
+                'notes'       => $this->form->notes,
+                'order_date'  => $this->form->order_date,
+                'status'      => $this->form->status,
             ]);
 
-            if ($transaction->status === 'Completed') {
-                $product = $transaction->product;
-                if ($transaction->type === 'In') {
-                    $product->increment('quantity', $transaction->quantity);
-                } elseif ($transaction->type === 'Out') {
-                    $product->decrement('quantity', $transaction->quantity);
+            // Remove old items
+            $transaction->items()->delete();
+
+            // Insert new items & update stock if needed
+            foreach ($this->items as $item) {
+                $transaction->items()->create([
+                    'product_id' => $item['product_id'],
+                    'quantity'   => $item['quantity'],
+                    'type'       => $item['type'],
+                ]);
+
+                if ($transaction->status === 'Completed') {
+                    $product = Product::find($item['product_id']);
+                    if ($item['type'] === 'In') {
+                        $product->increment('quantity', $item['quantity']);
+                    } elseif ($item['type'] === 'Out') {
+                        $product->decrement('quantity', $item['quantity']);
+                    }
                 }
             }
 
             DB::commit();
 
             return $this->redirectRoute('transactions.index', navigate: true);
+
         } catch (\Throwable $e) {
             DB::rollBack();
             throw $e;

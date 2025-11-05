@@ -89,5 +89,9 @@ class Transaction extends Model implements Auditable
     {
         return $this->belongsTo(\App\Models\Company::class, 'company_id', 'id');
     }
-    
+
+    public function items()
+    {
+        return $this->hasMany(TransactionItem::class);
+    }
 }

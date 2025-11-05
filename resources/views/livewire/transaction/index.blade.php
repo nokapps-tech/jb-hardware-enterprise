@@ -86,10 +86,8 @@
                                 <tr>
                                     	<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Transaction Number</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Branch</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Supplier</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Type</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Quantity</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Company</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product - Size - Brand (Type:Quantity)</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Description</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Notes</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Order Date</flux:text></th>
@@ -122,16 +120,22 @@
                                                 @endif
                                             </td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                @if($transaction->product)
-                                                    <a href="{{ route('products.show', $transaction->product->id) }}" class="text-blue-600 hover:underline">
-                                                        {{ $transaction->product->name }} - {{ $transaction->product->size }} - {{ $transaction->product->brand }}
-                                                    </a>
+                                                @if($transaction->items->count())
+                                                    <ul class="list-disc ml-4">
+                                                        @foreach($transaction->items as $item)
+                                                            <li>
+                                                                @if($item->product)
+                                                                    {{ $item->product->name }} - {{ $item->product->size }} - {{ $item->product->brand }} ({{ $item->type }}: {{ $item->quantity }})
+                                                                @else
+                                                                    <span class="text-gray-400">—</span>
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
                                                 @else
                                                     <span class="text-gray-400">—</span>
                                                 @endif
                                             </td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->type }}</flux:text></td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->quantity }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->description }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->notes }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->order_date }}</flux:text></td>

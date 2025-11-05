@@ -20,6 +20,9 @@ class TransactionForm extends Form
     public $order_date = '';
     public $status = '';
     public $created_by = '';
+    public $items = [
+        ['product_id' => '', 'quantity' => '', 'type' => ''],
+    ];
 
     public function rules(): array
     {
@@ -27,9 +30,10 @@ class TransactionForm extends Form
 			'transaction_number' => 'nullable',
             'branch_id' => 'required|exists:branches,id',
             'company_id' => 'required|exists:companies,id',
-            'product_id' => 'required|exists:products,id',
-			'type' => 'required|string',
-			'quantity' => 'required',
+            'items' => 'required|array|min:1',
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.quantity' => 'required|numeric|min:1',
+            'items.*.type' => 'required|string',
 			'description' => 'nullable|string',
 			'notes' => 'nullable|string',
             'order_date' => 'nullable|date',

@@ -95,7 +95,12 @@ class Summary extends Component
         if(!$user->hasAnyRole(['system-administrator','developer'])){
             $transactionQuery->whereIn('branch_id', $user->branches->pluck('id'));
         }
-        $this->recentTransactions = $transactionQuery->take(10)->get();
+        $this->recentTransactions = Transaction::with([
+            'branch',
+            'user',
+            'items.product',
+            'company'
+        ])->latest()->take(10)->get();
     }
 
     public function render()
