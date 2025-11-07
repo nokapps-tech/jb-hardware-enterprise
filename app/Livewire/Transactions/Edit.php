@@ -6,7 +6,6 @@ use App\Livewire\Forms\TransactionForm;
 use App\Models\Transaction;
 use App\Models\Branch;
 use App\Models\Product;
-use App\Models\Company;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -77,7 +76,7 @@ class Edit extends Component
             // Update transaction main fields
             $transaction->update([
                 'branch_id'   => $this->form->branch_id,
-                'company_id'  => $this->form->company_id,
+                'name'        => $this->form->name,
                 'description' => $this->form->description,
                 'notes'       => $this->form->notes,
                 'order_date'  => $this->form->order_date,
@@ -134,7 +133,6 @@ class Edit extends Component
 
         return view('livewire.transaction.edit', [
             'branches' => $branches,
-            'companies' => Company::orderBy('name')->get(),
             'products' => Product::orderBy('name')->get(),
             'transaction' => $this->form->transactionModel,
         ]);

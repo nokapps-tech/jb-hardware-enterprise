@@ -6,7 +6,6 @@ use App\Livewire\Forms\TransactionForm;
 use App\Models\Transaction;
 use App\Models\Branch;
 use App\Models\Product;
-use App\Models\Company;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -54,7 +53,7 @@ class Create extends Component
             $transaction = Transaction::create([
                 'transaction_number' => $nextNumber,
                 'branch_id'          => $this->form->branch_id,
-                'company_id'         => $this->form->company_id,
+                'name'               => $this->form->name,
                 'description'        => $this->form->description,
                 'notes'              => $this->form->notes,
                 'order_date'         => $this->form->order_date,
@@ -107,7 +106,6 @@ class Create extends Component
 
         return view('livewire.transaction.create', [
             'branches' => $branches,
-            'companies' => Company::orderBy('name')->get(),
             'products' => Product::orderBy('name')->get(),
         ]);
     }

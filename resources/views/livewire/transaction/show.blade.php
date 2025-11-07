@@ -36,14 +36,8 @@
         </div>
 
         <div class="p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700">
-            <flux:heading size="md" class="mb-2">Company</flux:heading>
-            <p>
-                @if($transaction->company)
-                    <a href="{{ route('companies.show', $transaction->company->id) }}" class="text-blue-600 hover:underline">{{ $transaction->company->name }}</a>
-                @else
-                    <span>-</span>
-                @endif
-            </p>
+            <flux:heading size="md" class="mb-2">Name</flux:heading>
+            <p>{{ $transaction->name ?? '-' }}</p>
         </div>
 
         <div class="p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700">

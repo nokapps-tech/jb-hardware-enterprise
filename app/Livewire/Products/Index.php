@@ -83,7 +83,7 @@ class Index extends Component
                     'over_threshold' => $q->whereColumn('quantity', '>', 'threshold'),
                     'low_stock'      => $q->whereColumn('quantity', '<', 'threshold')->where('quantity', '>', 0),
                     'out_of_stock'   => $q->where('quantity', 0),
-                    default           => null,
+                    default          => null,
                 };
             })
             ->latest('updated_at')

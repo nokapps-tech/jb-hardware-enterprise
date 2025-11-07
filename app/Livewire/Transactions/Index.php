@@ -77,7 +77,7 @@ class Index extends Component
                             ->orWhere('order_date', 'like', "%{$term}%")
                             ->orWhere('status', 'like', "%{$term}%")
                             ->orWhereHas('branch', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
-                            ->orWhereHas('company', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
+                            ->orWhereHas('name', fn($q3) => $q3->where('name', 'like', "%{$term}%"))
                             ->orWhereHas('items.product', function ($q3) use ($term) {
                                 $q3->whereRaw("CONCAT(name, ' - ', size, ' - ', brand) LIKE ?", ["%{$term}%"]);
                             })

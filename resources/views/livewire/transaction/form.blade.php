@@ -9,17 +9,8 @@
             <option value="{{ $branch->id }}">{{ $branch->name }}</option>
         @endforeach
     </flux:select>
-
     <div>
-        <flux:select 
-            wire:model="form.company_id" 
-            :label="__('Company')"
-        >
-            <option value="">{{ __('-- Select Company --') }}</option>
-            @foreach($companies as $company)
-                <option value="{{ $company->id }}">{{ $company->name }}</option>
-            @endforeach
-        </flux:select>
+        <flux:input wire:model="form.name" :label="__('Name')" type="text" autocomplete="form.name"/>
     </div>
     <div class="space-y-4">
         @foreach ($items as $index => $item)

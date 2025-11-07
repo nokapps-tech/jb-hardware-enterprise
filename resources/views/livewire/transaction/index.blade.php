@@ -86,7 +86,7 @@
                                 <tr>
                                     	<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Transaction Number</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Branch</flux:text></th>
-										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Company</flux:text></th>
+										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Name</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Product - Size - Brand (Type:Quantity)</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Description</flux:text></th>
 										<th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide"><flux:text variant="subtle" class="text-xs">Notes</flux:text></th>
@@ -110,15 +110,7 @@
                                                     <span class="text-gray-400">—</span>
                                                 @endif
                                             </td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                @if($transaction->company)
-                                                    <a href="{{ route('companies.show', $transaction->company->id) }}" class="text-blue-600 hover:underline">
-                                                        {{ $transaction->company->name }}
-                                                    </a>
-                                                @else
-                                                    <span class="text-gray-400">—</span>
-                                                @endif
-                                            </td>
+											<td class="whitespace-nowrap px-3 py-4 text-sm"><flux:text>{{ $transaction->name }}</flux:text></td>
 											<td class="whitespace-nowrap px-3 py-4 text-sm">
                                                 @if($transaction->items->count())
                                                     <ul class="list-disc ml-4">

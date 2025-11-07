@@ -11,7 +11,7 @@ class TransactionForm extends Form
     
     public $transaction_number = '';
     public $branch_id = '';
-    public $company_id = '';
+    public $name = '';
     public $product_id = '';
     public $type = '';
     public $quantity = '';
@@ -29,7 +29,7 @@ class TransactionForm extends Form
         return [
 			'transaction_number' => 'nullable',
             'branch_id' => 'required|exists:branches,id',
-            'company_id' => 'required|exists:companies,id',
+            'name' => 'nullable|string',
             'items' => 'required|array|min:1',
             'items.*.product_id' => 'required|exists:products,id',
             'items.*.quantity' => 'required|numeric|min:1',
@@ -48,7 +48,7 @@ class TransactionForm extends Form
         
         $this->transaction_number = $this->transactionModel->transaction_number;
         $this->branch_id = $this->transactionModel->branch_id;
-        $this->company_id = $this->transactionModel->company_id;
+        $this->name = $this->transactionModel->name;
         $this->product_id = $this->transactionModel->product_id;
         $this->type = $this->transactionModel->type;
         $this->quantity = $this->transactionModel->quantity;

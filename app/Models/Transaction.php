@@ -13,7 +13,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property $id
  * @property $transaction_number
  * @property $branch_id
- * @property $company_id
+ * @property $name
  * @property $product_id
  * @property $type
  * @property $quantity
@@ -44,7 +44,7 @@ class Transaction extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['transaction_number', 'branch_id', 'company_id', 'product_id', 'type', 'quantity', 'description', 'notes', 'order_date', 'status', 'created_by'];
+    protected $fillable = ['transaction_number', 'branch_id', 'name', 'product_id', 'type', 'quantity', 'description', 'notes', 'order_date', 'status', 'created_by'];
 
     public const TYPES = [
         'In',
@@ -82,14 +82,6 @@ class Transaction extends Model implements Auditable
         return $this->belongsTo(\App\Models\Product::class, 'product_id', 'id');
     }
     
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function company()
-    {
-        return $this->belongsTo(\App\Models\Company::class, 'company_id', 'id');
-    }
-
     public function items()
     {
         return $this->hasMany(TransactionItem::class);
