@@ -53,10 +53,12 @@
                 @endforeach
             </flux:select>
 
+            @if ($index > 0)
+                <flux:button wire:click="removeItem({{ $index }})" icon="minus" variant="danger"/>
+            @endif
+
             @if ($loop->last)
                 <flux:button wire:click="addItem" icon="plus" variant="primary" />
-            @else
-                <flux:button wire:click="removeItem({{ $index }})" icon="minus" variant="danger"/>
             @endif
         </div>
     @endforeach

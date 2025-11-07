@@ -20,7 +20,10 @@ class Index extends Component
     public ?string $filter = null;
 
     /** @var array<string, string> */
-    public array $filters = [];
+    public array $filters = [
+        'order_date_asc' => 'Order Date (Oldest First)',
+        'order_date_desc' => 'Order Date (Newest First)',
+    ];
     
     protected $queryString = [
         'filter' => ['except' => null],
@@ -85,7 +88,9 @@ class Index extends Component
             })
             ->when($this->filter, function (Builder $q) {
                 match ($this->filter) {
-                    default => null,
+                    'order_date_asc'    => $q->orderBy('order_date', 'asc'),
+                    'order_date_desc'   => $q->orderBy('order_date', 'desc'),
+                    default             => null,
                 };
             })
             ->latest('updated_at')

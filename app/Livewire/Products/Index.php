@@ -20,9 +20,9 @@ class Index extends Component
 
     /** @var array<string, string> */
     public array $filters = [
-        'over-threshold' => 'Over Threshold',
-        'low-stock' => 'Low Stock',
-        'out-of-stock' => 'Out of Stock',
+        'over_threshold' => 'Over Threshold',
+        'low_stock' => 'Low Stock',
+        'out_of_stock' => 'Out of Stock',
     ];
 
     protected $queryString = [
@@ -80,9 +80,9 @@ class Index extends Component
             })
             ->when($this->filter, function (Builder $q) {
                 match ($this->filter) {
-                    'over-threshold' => $q->whereColumn('quantity', '>', 'threshold'),
-                    'low-stock'      => $q->whereColumn('quantity', '<', 'threshold')->where('quantity', '>', 0),
-                    'out-of-stock'   => $q->where('quantity', 0),
+                    'over_threshold' => $q->whereColumn('quantity', '>', 'threshold'),
+                    'low_stock'      => $q->whereColumn('quantity', '<', 'threshold')->where('quantity', '>', 0),
+                    'out_of_stock'   => $q->where('quantity', 0),
                     default           => null,
                 };
             })

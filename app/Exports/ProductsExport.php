@@ -29,9 +29,9 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping, Shoul
             ->when($this->search, fn($q) => $q->where('name', 'like', "%{$this->search}%"))
             ->when($this->filter, function ($q) {
                 match ($this->filter) {
-                    'over-threshold' => $q->whereColumn('quantity', '>', 'threshold'),
-                    'low-stock'      => $q->whereColumn('quantity', '<', 'threshold')->where('quantity', '>', 0),
-                    'out-of-stock'   => $q->where('quantity', 0),
+                    'over_threshold' => $q->whereColumn('quantity', '>', 'threshold'),
+                    'low_stock'      => $q->whereColumn('quantity', '<', 'threshold')->where('quantity', '>', 0),
+                    'out_of_stock'   => $q->where('quantity', 0),
                     default           => null,
                 };
             })
