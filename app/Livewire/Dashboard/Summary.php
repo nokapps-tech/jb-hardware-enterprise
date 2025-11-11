@@ -99,7 +99,6 @@ class Summary extends Component
             'branch',
             'user',
             'items.product',
-            'company'
         ])->latest()->take(10)->get();
     }
 
